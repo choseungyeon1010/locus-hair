@@ -1,22 +1,22 @@
 {
-  "updated_at": "2026-11-13T01:28:00+09:00",
+  "updated_at": "2026-11-13T02:22:00+09:00",
   "today": {
     "date": "2026-11-13",
     "day_label": "11월 13일 금요일",
     "total_count": 11,
     "total_revenue": 212000,
     "reservations": [
-      { "id": 1, "time": "10:30", "period": "오전", "name": "김세웅님", "phone": "010-3306-7852", "service": "남자컷 + 아이롱 (남)", "price": 67000, "pay": "N-Pay 현장결제", "assigned": false, "customer_type": "미지정", "visit_info": "최근 52일 전 (09/22)", "status": "pending" },
-      { "id": 2, "time": "12:00", "period": "오후", "name": "정의영님", "phone": "010-4402-3263", "service": "남자컷 + 새치 염색 (남)", "price": 32000, "pay": "N-Pay 현장결제", "assigned": true, "customer_type": "지정", "visit_info": "최근 24일 전 (10/20)", "status": "pending" },
-      { "id": 3, "time": "3:30", "period": "오후", "name": "기태원님", "phone": "010-6470-2589", "service": "남자컷", "price": 12000, "pay": "현장결제", "assigned": true, "customer_type": "지정", "visit_info": "최근 21일 전 (10/23)", "status": "pending" },
-      { "id": 4, "time": "4:00", "period": "오후", "name": "황중필님", "phone": "010-6462-5943", "service": "남자컷", "price": 12000, "pay": "현장결제", "assigned": true, "customer_type": "지정", "visit_info": "최근 1일 전 (11/12)", "status": "pending" },
-      { "id": 5, "time": "4:30", "period": "오후", "name": "김정옥님", "phone": "010-7766-9959", "service": "남자컷", "price": 12000, "pay": "현장결제", "assigned": false, "customer_type": "미지정", "visit_info": "최근 31일 전 (10/13)", "status": "pending" },
-      { "id": 6, "time": "5:00", "period": "오후", "name": "전호윤님", "phone": "010-6378-7069", "service": "남자컷", "price": 12000, "pay": "N-Pay 현장결제", "assigned": true, "customer_type": "지정", "visit_info": "최근 39일 전 (10/05)", "status": "pending" },
-      { "id": 7, "time": "5:30", "period": "오후", "name": "김영인님", "phone": "010-3200-5500", "service": "남자컷", "price": 12000, "pay": "현장결제", "assigned": true, "customer_type": "지정", "visit_info": "최근 23일 전 (10/21)", "status": "pending" },
-      { "id": 8, "time": "6:00", "period": "오후", "name": "장한서님", "phone": "010-7237-2200", "service": "남자컷", "price": 12000, "pay": "현장결제", "assigned": true, "customer_type": "지정", "visit_info": "최근 32일 전 (10/12)", "status": "pending" },
-      { "id": 9, "time": "6:30", "period": "오후", "name": "김일철님", "phone": "010-8620-2850", "service": "남자컷", "price": 12000, "pay": "현장결제", "assigned": false, "customer_type": "미지정", "visit_info": "최근 9일 전 (11/04)", "status": "pending" },
-      { "id": 10, "time": "7:00", "period": "오후", "name": "김이현님", "phone": "010-2722-7133", "service": "남자컷", "price": 12000, "pay": "현장결제", "assigned": true, "customer_type": "지정", "visit_info": "최근 24일 전 (10/20)", "status": "pending" },
-      { "id": 11, "time": "7:30", "period": "오후", "name": "최성호님", "phone": "010-6281-5616", "service": "남자컷 + 샴푸 (남성)", "price": 17000, "pay": "현장결제", "assigned": true, "customer_type": "지정", "visit_info": "최근 31일 전 (10/13)", "status": "pending" }
+      { "id": 1, "time": "10:30", "period": "오전", "name": "김세웅님", "phone": "010-3306-7852", "service": "남자컷 + 아이롱 (남)", "price": 67000, "pay": "N-Pay 현장결제", "assigned": false, "customer_type": "미지정", "visit_info": "최근 52일 전 (09/22)", "status": "pending", "memo": "블랙/9mm투블럭상고", "booking_memo": "네이버 예약건 · 잔여금 N-Pay 현장결제 (67,000원)" },
+      { "id": 2, "time": "12:00", "period": "오후", "name": "정의영님", "phone": "010-4402-3263", "service": "남자컷 + 새치 염색 (남)", "price": 32000, "pay": "N-Pay 현장결제", "assigned": true, "customer_type": "지정", "visit_info": "최근 24일 전 (10/20)", "status": "pending", "memo": "새치커버 염색 (오징어먹물) + 댄디컷", "booking_memo": "네이버 예약건 · 잔여금 N-Pay 현장결제 (32,000원)" },
+      { "id": 3, "time": "3:30", "period": "오후", "name": "기태원님", "phone": "010-6470-2589", "service": "남자컷", "price": 12000, "pay": "현장결제", "assigned": true, "customer_type": "지정", "visit_info": "최근 21일 전 (10/23)", "status": "pending", "memo": "상고 댄디컷 스타일 유지 · 옆머리 슬림 다운", "booking_memo": "매장 전화 예약 · 현장결제" },
+      { "id": 4, "time": "4:00", "period": "오후", "name": "황중필님", "phone": "010-6462-5943", "service": "남자컷", "price": 12000, "pay": "현장결제", "assigned": true, "customer_type": "지정", "visit_info": "최근 1일 전 (11/12)", "status": "pending", "memo": "어제(11/12) 방문 고객 · 라인 리터치 및 잔여 모발 정리", "booking_memo": "매장 방문 예약 · 현장결제" },
+      { "id": 5, "time": "4:30", "period": "오후", "name": "김정옥님", "phone": "010-7766-9959", "service": "남자컷", "price": 12000, "pay": "현장결제", "assigned": false, "customer_type": "미지정", "visit_info": "최근 31일 전 (10/13)", "status": "pending", "memo": "자연스러운 볼륨 커트 · 귀 주변 라인 단정하게", "booking_memo": "매장 예약 · 현장결제" },
+      { "id": 6, "time": "5:00", "period": "오후", "name": "전호윤님", "phone": "010-6378-7069", "service": "남자컷", "price": 12000, "pay": "N-Pay 현장결제", "assigned": true, "customer_type": "지정", "visit_info": "최근 39일 전 (10/05)", "status": "pending", "memo": "주기적 방문 지정고객 (39일 주기) · 단정한 남성컷", "booking_memo": "네이버 예약건 · 현장결제" },
+      { "id": 7, "time": "5:30", "period": "오후", "name": "김영인님", "phone": "010-3200-5500", "service": "남자컷", "price": 12000, "pay": "현장결제", "assigned": true, "customer_type": "지정", "visit_info": "최근 23일 전 (10/21)", "status": "pending", "memo": "투블럭 상고 커트 · 라인 정리", "booking_memo": "매장 예약 · 현장결제" },
+      { "id": 8, "time": "6:00", "period": "오후", "name": "장한서님", "phone": "010-7237-2200", "service": "남자컷", "price": 12000, "pay": "현장결제", "assigned": true, "customer_type": "지정", "visit_info": "최근 32일 전 (10/12)", "status": "pending", "memo": "기존 스타일 댄디 상고 컷 유지", "booking_memo": "매장 예약 · 현장결제" },
+      { "id": 9, "time": "6:30", "period": "오후", "name": "김일철님", "phone": "010-8620-2850", "service": "남자컷", "price": 12000, "pay": "현장결제", "assigned": false, "customer_type": "미지정", "visit_info": "최근 9일 전 (11/04)", "status": "pending", "memo": "기본 상고 남성컷 · 깔끔한 네이프 라인", "booking_memo": "매장 예약 · 현장결제" },
+      { "id": 10, "time": "7:00", "period": "오후", "name": "김이현님", "phone": "010-2722-7133", "service": "남자컷", "price": 12000, "pay": "현장결제", "assigned": true, "customer_type": "지정", "visit_info": "최근 24일 전 (10/20)", "status": "pending", "memo": "자연스러운 댄디 남성컷 · 질감 정리", "booking_memo": "매장 예약 · 현장결제" },
+      { "id": 11, "time": "7:30", "period": "오후", "name": "최성호님", "phone": "010-6281-5616", "service": "남자컷 + 샴푸 (남성)", "price": 17000, "pay": "현장결제", "assigned": true, "customer_type": "지정", "visit_info": "최근 31일 전 (10/13)", "status": "pending", "memo": "남성컷 + 두피 샴푸 케어 · 네이프 라인 테이퍼링", "booking_memo": "매장 예약 · 현장결제" }
     ]
   },
   "tomorrow": {
@@ -25,17 +25,17 @@
     "total_count": 11,
     "total_revenue": 249000,
     "reservations": [
-      { "id": 101, "time": "10:00", "period": "오전", "name": "권명진님", "phone": "010-8570-1931", "service": "남자컷 + 새치 염색 (남)", "price": 32000, "pay": "현장결제", "assigned": true, "customer_type": "지정", "visit_info": "최근 41일 전 (10/03)", "status": "pending" },
-      { "id": 102, "time": "10:30", "period": "오전", "name": "김성수님", "phone": "010-7239-4678", "service": "남자컷", "price": 12000, "pay": "현장결제", "assigned": true, "customer_type": "신규/지정", "visit_info": "첫 방문 (신규)", "status": "pending" },
-      { "id": 103, "time": "11:00", "period": "오전", "name": "방성호님", "phone": "010-9676-9657", "service": "남자컷 + 샴푸 (남성)", "price": 17000, "pay": "현장결제", "assigned": true, "customer_type": "지정", "visit_info": "최근 69일 전 (09/05)", "status": "pending" },
-      { "id": 104, "time": "12:00", "period": "오후", "name": "전지영님", "phone": "010-5439-1484", "service": "남학생컷", "price": 10000, "pay": "현장결제", "assigned": true, "customer_type": "지정", "visit_info": "최근 41일 전 (10/03)", "status": "pending" },
-      { "id": 105, "time": "1:00", "period": "오후", "name": "박철우님", "phone": "010-3749-1986", "service": "새치 염색 (남)", "price": 20000, "pay": "현장결제", "assigned": true, "customer_type": "지정", "visit_info": "최근 13일 전 (10/31)", "status": "pending" },
-      { "id": 106, "time": "1:30", "period": "오후", "name": "백차홍님", "phone": "010-5161-5070", "service": "아이롱 (남) + 새치 염색 (남) + 두피 크리닉 (남성)", "price": 100000, "pay": "현장결제", "assigned": true, "customer_type": "지정", "visit_info": "최근 17일 전 (10/27)", "status": "pending" },
-      { "id": 107, "time": "4:00", "period": "오후", "name": "강동우님", "phone": "010-4841-4893", "service": "남자컷", "price": 12000, "pay": "현장결제", "assigned": true, "customer_type": "지정", "visit_info": "최근 19일 전 (10/25)", "status": "pending" },
-      { "id": 108, "time": "4:30", "period": "오후", "name": "이연주님", "phone": "010-8650-6371", "service": "남자컷", "price": 12000, "pay": "현장결제", "assigned": true, "customer_type": "지정", "visit_info": "최근 54일 전 (09/20)", "status": "pending" },
-      { "id": 109, "time": "5:00", "period": "오후", "name": "이연주님", "phone": "010-8650-6371", "service": "남학생컷", "price": 10000, "pay": "현장결제", "assigned": true, "customer_type": "지정", "visit_info": "최근 54일 전 (09/20)", "status": "pending" },
-      { "id": 110, "time": "5:30", "period": "오후", "name": "천성철님", "phone": "010-4544-7689", "service": "남자컷", "price": 12000, "pay": "현장결제", "assigned": true, "customer_type": "지정", "visit_info": "최근 48일 전 (09/26)", "status": "pending" },
-      { "id": 111, "time": "6:30", "period": "오후", "name": "유경민님", "phone": "010-5003-1854", "service": "남자컷", "price": 12000, "pay": "현장결제", "assigned": true, "customer_type": "지정", "visit_info": "최근 14일 전 (10/30)", "status": "pending" }
+      { "id": 101, "time": "10:00", "period": "오전", "name": "권명진님", "phone": "010-8570-1931", "service": "남자컷 + 새치 염색 (남)", "price": 32000, "pay": "현장결제", "assigned": true, "customer_type": "지정", "visit_info": "최근 41일 전 (10/03)", "status": "pending", "memo": "새치 염색 + 깔끔한 컷", "booking_memo": "매장 예약 · 현장결제" },
+      { "id": 102, "time": "10:30", "period": "오전", "name": "김성수님", "phone": "010-7239-4678", "service": "남자컷", "price": 12000, "pay": "현장결제", "assigned": true, "customer_type": "신규/지정", "visit_info": "첫 방문 (신규)", "status": "pending", "memo": "첫 방문 신규 고객 · 맞춤 스타일 상담 후 컷 진행", "booking_memo": "매장 예약 · 현장결제" },
+      { "id": 103, "time": "11:00", "period": "오전", "name": "방성호님", "phone": "010-9676-9657", "service": "남자컷 + 샴푸 (남성)", "price": 17000, "pay": "현장결제", "assigned": true, "customer_type": "지정", "visit_info": "최근 69일 전 (09/05)", "status": "pending", "memo": "남자컷 + 샴푸 · 69일만 방문 (기장 여유있게 정리)", "booking_memo": "매장 예약 · 현장결제" },
+      { "id": 104, "time": "12:00", "period": "오후", "name": "전지영님", "phone": "010-5439-1484", "service": "남학생컷", "price": 10000, "pay": "현장결제", "assigned": true, "customer_type": "지정", "visit_info": "최근 41일 전 (10/03)", "status": "pending", "memo": "남학생컷 · 단정하고 활동적인 스타일", "booking_memo": "매장 예약 · 현장결제" },
+      { "id": 105, "time": "1:00", "period": "오후", "name": "박철우님", "phone": "010-3749-1986", "service": "새치 염색 (남)", "price": 20000, "pay": "현장결제", "assigned": true, "customer_type": "지정", "visit_info": "최근 13일 전 (10/31)", "status": "pending", "memo": "새치 염색 전문 · 두피 자극 최소화 시술", "booking_memo": "매장 예약 · 현장결제" },
+      { "id": 106, "time": "1:30", "period": "오후", "name": "백차홍님", "phone": "010-5161-5070", "service": "아이롱 (남) + 새치 염색 (남) + 두피 크리닉 (남성)", "price": 100000, "pay": "현장결제", "assigned": true, "customer_type": "지정", "visit_info": "최근 17일 전 (10/27)", "status": "pending", "memo": "아이롱펌 + 새치 염색 + 두피 크리닉 풀코스 (약제 반응 주의)", "booking_memo": "매장 예약 · 현장결제" },
+      { "id": 107, "time": "4:00", "period": "오후", "name": "강동우님", "phone": "010-4841-4893", "service": "남자컷", "price": 12000, "pay": "현장결제", "assigned": true, "customer_type": "지정", "visit_info": "최근 19일 전 (10/25)", "status": "pending", "memo": "기존 댄디 스타일 유지 컷", "booking_memo": "매장 예약 · 현장결제" },
+      { "id": 108, "time": "4:30", "period": "오후", "name": "이연주님", "phone": "010-8650-6371", "service": "남자컷", "price": 12000, "pay": "현장결제", "assigned": true, "customer_type": "지정", "visit_info": "최근 54일 전 (09/20)", "status": "pending", "memo": "남성컷 · 깔끔한 라인", "booking_memo": "매장 예약 · 현장결제" },
+      { "id": 109, "time": "5:00", "period": "오후", "name": "이연주님", "phone": "010-8650-6371", "service": "남학생컷", "price": 10000, "pay": "현장결제", "assigned": true, "customer_type": "지정", "visit_info": "최근 54일 전 (09/20)", "status": "pending", "memo": "남학생컷 연계 시술", "booking_memo": "매장 예약 · 현장결제" },
+      { "id": 110, "time": "5:30", "period": "오후", "name": "천성철님", "phone": "010-4544-7689", "service": "남자컷", "price": 12000, "pay": "현장결제", "assigned": true, "customer_type": "지정", "visit_info": "최근 48일 전 (09/26)", "status": "pending", "memo": "48일 주기 지정고객 · 기본 상고 스타일", "booking_memo": "매장 예약 · 현장결제" },
+      { "id": 111, "time": "6:30", "period": "오후", "name": "유경민님", "phone": "010-5003-1854", "service": "남자컷", "price": 12000, "pay": "현장결제", "assigned": true, "customer_type": "지정", "visit_info": "최근 14일 전 (10/30)", "status": "pending", "memo": "투블럭 상고 커트 · 슬림한 사이드 라인", "booking_memo": "매장 예약 · 현장결제" }
     ]
   },
   "dayafter": {
@@ -44,9 +44,9 @@
     "total_count": 3,
     "total_revenue": 41000,
     "reservations": [
-      { "id": 201, "time": "10:00", "period": "오전", "name": "신홍주님", "phone": "010-6282-9704", "service": "남자컷 + 샴푸 (남성)", "price": 17000, "pay": "현장결제", "assigned": true, "customer_type": "지정", "visit_info": "최근 20일 전 (10/24)", "status": "pending" },
-      { "id": 202, "time": "2:00", "period": "오후", "name": "이지영님", "phone": "010-7172-6334", "service": "남자컷", "price": 12000, "pay": "현장결제", "assigned": true, "customer_type": "지정", "visit_info": "최근 10일 전 (11/03)", "status": "pending" },
-      { "id": 203, "time": "3:00", "period": "오후", "name": "신초롱님", "phone": "010-3755-6293", "service": "남자컷", "price": 12000, "pay": "현장결제", "assigned": true, "customer_type": "지정", "visit_info": "최근 33일 전 (10/11)", "status": "pending" }
+      { "id": 201, "time": "10:00", "period": "오전", "name": "신홍주님", "phone": "010-6282-9704", "service": "남자컷 + 샴푸 (남성)", "price": 17000, "pay": "현장결제", "assigned": true, "customer_type": "지정", "visit_info": "최근 20일 전 (10/24)", "status": "pending", "memo": "남자컷 + 두피 샴푸 케어", "booking_memo": "매장 예약 · 현장결제" },
+      { "id": 202, "time": "2:00", "period": "오후", "name": "이지영님", "phone": "010-7172-6334", "service": "남자컷", "price": 12000, "pay": "현장결제", "assigned": true, "customer_type": "지정", "visit_info": "최근 10일 전 (11/03)", "status": "pending", "memo": "10일 주기 방문 · 가벼운 질감 정리 컷", "booking_memo": "매장 예약 · 현장결제" },
+      { "id": 203, "time": "3:00", "period": "오후", "name": "신초롱님", "phone": "010-3755-6293", "service": "남자컷", "price": 12000, "pay": "현장결제", "assigned": true, "customer_type": "지정", "visit_info": "최근 33일 전 (10/11)", "status": "pending", "memo": "자연스러운 댄디 스타일 컷", "booking_memo": "매장 예약 · 현장결제" }
     ]
   }
 }
