@@ -156,8 +156,8 @@
     <div class="pt-1">
       <div class="flex items-center justify-between">
         <div class="text-sm font-bold text-emerald-400" id="currentSectionDate">11월 13일 금요일</div>
-        <div class="text-[11px] text-amber-400/90 font-medium flex items-center space-x-1">
-          <span>💡 카드 터치 시 고객 메모 확인</span>
+        <div class="text-[11px] text-zinc-400 font-medium flex items-center space-x-1">
+          <span>💡 카드 터치 시 고객 특이사항 확인</span>
         </div>
       </div>
       
@@ -165,7 +165,7 @@
       <div class="flex items-center justify-between text-[11px] text-rose-400 mt-1 mb-1">
         <div class="flex items-center space-x-1.5">
           <span class="w-1.5 h-1.5 rounded-full bg-rose-500 inline-block"></span>
-          <span id="timelineProgressText">02:22 · 실시간 영업 대기</span>
+          <span id="timelineProgressText">02:35 · 실시간 영업 대기</span>
         </div>
       </div>
       <div class="w-full bg-dark-card h-1 rounded-full overflow-hidden">
@@ -181,46 +181,46 @@
   </main>
 
   <script>
-    // Embedded Data Feed with Full Unmasked Phone Numbers & Customer Notes Memo
+    // Embedded Data Feed: HandSOS CRM 실측 기준 (김세웅 고객만 실제 메모 존재, 나머지 공란 고객은 '특이사항 없음')
     const DATA = {
       today: {
         dateLabel: "11월 13일 금요일",
         reservations: [
           { id: 1, period: "오전", time: "10:30", name: "김세웅님", service: "남자컷 + 아이롱 (남)", price: 67000, status: "pending", phone: "010-3306-7852", customerType: "미지정", visitInfo: "최근 52일 전 (09/22)", memo: "블랙/9mm투블럭상고", bookingMemo: "네이버 예약건 · 잔여금 N-Pay 현장결제 (67,000원)" },
-          { id: 2, period: "오후", time: "12:00", name: "정의영님", service: "남자컷 + 새치 염색 (남)", price: 32000, status: "pending", phone: "010-4402-3263", customerType: "지정", visitInfo: "최근 24일 전 (10/20)", memo: "새치커버 염색 (오징어먹물) + 댄디컷", bookingMemo: "네이버 예약건 · 잔여금 N-Pay 현장결제 (32,000원)" },
-          { id: 3, period: "오후", time: "3:30", name: "기태원님", service: "남자컷", price: 12000, status: "pending", phone: "010-6470-2589", customerType: "지정", visitInfo: "최근 21일 전 (10/23)", memo: "상고 댄디컷 스타일 유지 · 옆머리 슬림 다운", bookingMemo: "매장 전화 예약 · 현장결제" },
-          { id: 4, period: "오후", time: "4:00", name: "황중필님", service: "남자컷", price: 12000, status: "pending", phone: "010-6462-5943", customerType: "지정", visitInfo: "최근 1일 전 (11/12)", memo: "어제(11/12) 방문 고객 · 라인 리터치 및 잔여 모발 정리", bookingMemo: "매장 방문 예약 · 현장결제" },
-          { id: 5, period: "오후", time: "4:30", name: "김정옥님", service: "남자컷", price: 12000, status: "pending", phone: "010-7766-9959", customerType: "미지정", visitInfo: "최근 31일 전 (10/13)", memo: "자연스러운 볼륨 커트 · 귀 주변 라인 단정하게", bookingMemo: "매장 예약 · 현장결제" },
-          { id: 6, period: "오후", time: "5:00", name: "전호윤님", service: "남자컷", price: 12000, status: "pending", phone: "010-6378-7069", customerType: "지정", visitInfo: "최근 39일 전 (10/05)", memo: "주기적 방문 지정고객 (39일 주기) · 단정한 남성컷", bookingMemo: "네이버 예약건 · 현장결제" },
-          { id: 7, period: "오후", time: "5:30", name: "김영인님", service: "남자컷", price: 12000, status: "pending", phone: "010-3200-5500", customerType: "지정", visitInfo: "최근 23일 전 (10/21)", memo: "투블럭 상고 커트 · 라인 정리", bookingMemo: "매장 예약 · 현장결제" },
-          { id: 8, period: "오후", time: "6:00", name: "장한서님", service: "남자컷", price: 12000, status: "pending", phone: "010-7237-2200", customerType: "지정", visitInfo: "최근 32일 전 (10/12)", memo: "기존 스타일 댄디 상고 컷 유지", bookingMemo: "매장 예약 · 현장결제" },
-          { id: 9, period: "오후", time: "6:30", name: "김일철님", service: "남자컷", price: 12000, status: "pending", phone: "010-8620-2850", customerType: "미지정", visitInfo: "최근 9일 전 (11/04)", memo: "기본 상고 남성컷 · 깔끔한 네이프 라인", bookingMemo: "매장 예약 · 현장결제" },
-          { id: 10, period: "오후", time: "7:00", name: "김이현님", service: "남자컷", price: 12000, status: "pending", phone: "010-2722-7133", customerType: "지정", visitInfo: "최근 24일 전 (10/20)", memo: "자연스러운 댄디 남성컷 · 질감 정리", bookingMemo: "매장 예약 · 현장결제" },
-          { id: 11, period: "오후", time: "7:30", name: "최성호님", service: "남자컷 + 샴푸 (남성)", price: 17000, status: "pending", phone: "010-6281-5616", customerType: "지정", visitInfo: "최근 31일 전 (10/13)", memo: "남성컷 + 두피 샴푸 케어 · 네이프 라인 테이퍼링", bookingMemo: "매장 예약 · 현장결제" }
+          { id: 2, period: "오후", time: "12:00", name: "정의영님", service: "남자컷 + 새치 염색 (남)", price: 32000, status: "pending", phone: "010-4402-3263", customerType: "지정", visitInfo: "최근 24일 전 (10/20)", memo: "", bookingMemo: "네이버 예약건 · 잔여금 N-Pay 현장결제 (32,000원)" },
+          { id: 3, period: "오후", time: "3:30", name: "기태원님", service: "남자컷", price: 12000, status: "pending", phone: "010-6470-2589", customerType: "지정", visitInfo: "최근 21일 전 (10/23)", memo: "", bookingMemo: "" },
+          { id: 4, period: "오후", time: "4:00", name: "황중필님", service: "남자컷", price: 12000, status: "pending", phone: "010-6462-5943", customerType: "지정", visitInfo: "최근 1일 전 (11/12)", memo: "", bookingMemo: "" },
+          { id: 5, period: "오후", time: "4:30", name: "김정옥님", service: "남자컷", price: 12000, status: "pending", phone: "010-7766-9959", customerType: "미지정", visitInfo: "최근 31일 전 (10/13)", memo: "", bookingMemo: "" },
+          { id: 6, period: "오후", time: "5:00", name: "전호윤님", service: "남자컷", price: 12000, status: "pending", phone: "010-6378-7069", customerType: "지정", visitInfo: "최근 39일 전 (10/05)", memo: "", bookingMemo: "" },
+          { id: 7, period: "오후", time: "5:30", name: "김영인님", service: "남자컷", price: 12000, status: "pending", phone: "010-3200-5500", customerType: "지정", visitInfo: "최근 23일 전 (10/21)", memo: "", bookingMemo: "" },
+          { id: 8, period: "오후", time: "6:00", name: "장한서님", service: "남자컷", price: 12000, status: "pending", phone: "010-7237-2200", customerType: "지정", visitInfo: "최근 32일 전 (10/12)", memo: "", bookingMemo: "" },
+          { id: 9, period: "오후", time: "6:30", name: "김일철님", service: "남자컷", price: 12000, status: "pending", phone: "010-8620-2850", customerType: "미지정", visitInfo: "최근 9일 전 (11/04)", memo: "", bookingMemo: "" },
+          { id: 10, period: "오후", time: "7:00", name: "김이현님", service: "남자컷", price: 12000, status: "pending", phone: "010-2722-7133", customerType: "지정", visitInfo: "최근 24일 전 (10/20)", memo: "", bookingMemo: "" },
+          { id: 11, period: "오후", time: "7:30", name: "최성호님", service: "남자컷 + 샴푸 (남성)", price: 17000, status: "pending", phone: "010-6281-5616", customerType: "지정", visitInfo: "최근 31일 전 (10/13)", memo: "", bookingMemo: "" }
         ]
       },
       tomorrow: {
         dateLabel: "11월 14일 토요일",
         reservations: [
-          { id: 101, period: "오전", time: "10:00", name: "권명진님", service: "남자컷 + 새치 염색 (남)", price: 32000, status: "pending", phone: "010-8570-1931", customerType: "지정", visitInfo: "최근 41일 전 (10/03)", memo: "새치 염색 + 깔끔한 컷", bookingMemo: "매장 예약 · 현장결제" },
-          { id: 102, period: "오전", time: "10:30", name: "김성수님", service: "남자컷", price: 12000, status: "pending", phone: "010-7239-4678", customerType: "신규/지정", visitInfo: "첫 방문 (신규)", memo: "첫 방문 신규 고객 · 맞춤 스타일 상담 후 컷 진행", bookingMemo: "매장 예약 · 현장결제" },
-          { id: 103, period: "오전", time: "11:00", name: "방성호님", service: "남자컷 + 샴푸 (남성)", price: 17000, status: "pending", phone: "010-9676-9657", customerType: "지정", visitInfo: "최근 69일 전 (09/05)", memo: "남자컷 + 샴푸 · 69일만 방문 (기장 여유있게 정리)", bookingMemo: "매장 예약 · 현장결제" },
-          { id: 104, period: "오후", time: "12:00", name: "전지영님", service: "남학생컷", price: 10000, status: "pending", phone: "010-5439-1484", customerType: "지정", visitInfo: "최근 41일 전 (10/03)", memo: "남학생컷 · 단정하고 활동적인 스타일", bookingMemo: "매장 예약 · 현장결제" },
-          { id: 105, period: "오후", time: "1:00", name: "박철우님", service: "새치 염색 (남)", price: 20000, status: "pending", phone: "010-3749-1986", customerType: "지정", visitInfo: "최근 13일 전 (10/31)", memo: "새치 염색 전문 · 두피 자극 최소화 시술", bookingMemo: "매장 예약 · 현장결제" },
-          { id: 106, period: "오후", time: "1:30", name: "백차홍님", service: "아이롱 (남) + 새치 염색 (남) + 두피 크리닉 (남성)", price: 100000, status: "pending", phone: "010-5161-5070", customerType: "지정", visitInfo: "최근 17일 전 (10/27)", memo: "아이롱펌 + 새치 염색 + 두피 크리닉 풀코스 (약제 반응 주의)", bookingMemo: "매장 예약 · 현장결제" },
-          { id: 107, period: "오후", time: "4:00", name: "강동우님", service: "남자컷", price: 12000, status: "pending", phone: "010-4841-4893", customerType: "지정", visitInfo: "최근 19일 전 (10/25)", memo: "기존 댄디 스타일 유지 컷", bookingMemo: "매장 예약 · 현장결제" },
-          { id: 108, period: "오후", time: "4:30", name: "이연주님", service: "남자컷", price: 12000, status: "pending", phone: "010-8650-6371", customerType: "지정", visitInfo: "최근 54일 전 (09/20)", memo: "남성컷 · 깔끔한 라인", bookingMemo: "매장 예약 · 현장결제" },
-          { id: 109, period: "오후", time: "5:00", name: "이연주님", service: "남학생컷", price: 10000, status: "pending", phone: "010-8650-6371", customerType: "지정", visitInfo: "최근 54일 전 (09/20)", memo: "남학생컷 연계 시술", bookingMemo: "매장 예약 · 현장결제" },
-          { id: 110, period: "오후", time: "5:30", name: "천성철님", service: "남자컷", price: 12000, status: "pending", phone: "010-4544-7689", customerType: "지정", visitInfo: "최근 48일 전 (09/26)", memo: "48일 주기 지정고객 · 기본 상고 스타일", bookingMemo: "매장 예약 · 현장결제" },
-          { id: 111, period: "오후", time: "6:30", name: "유경민님", service: "남자컷", price: 12000, status: "pending", phone: "010-5003-1854", customerType: "지정", visitInfo: "최근 14일 전 (10/30)", memo: "투블럭 상고 커트 · 슬림한 사이드 라인", bookingMemo: "매장 예약 · 현장결제" }
+          { id: 101, period: "오전", time: "10:00", name: "권명진님", service: "남자컷 + 새치 염색 (남)", price: 32000, status: "pending", phone: "010-8570-1931", customerType: "지정", visitInfo: "최근 41일 전 (10/03)", memo: "", bookingMemo: "" },
+          { id: 102, period: "오전", time: "10:30", name: "김성수님", service: "남자컷", price: 12000, status: "pending", phone: "010-7239-4678", customerType: "신규/지정", visitInfo: "첫 방문 (신규)", memo: "", bookingMemo: "" },
+          { id: 103, period: "오전", time: "11:00", name: "방성호님", service: "남자컷 + 샴푸 (남성)", price: 17000, status: "pending", phone: "010-9676-9657", customerType: "지정", visitInfo: "최근 69일 전 (09/05)", memo: "", bookingMemo: "" },
+          { id: 104, period: "오후", time: "12:00", name: "전지영님", service: "남학생컷", price: 10000, status: "pending", phone: "010-5439-1484", customerType: "지정", visitInfo: "최근 41일 전 (10/03)", memo: "", bookingMemo: "" },
+          { id: 105, period: "오후", time: "1:00", name: "박철우님", service: "새치 염색 (남)", price: 20000, status: "pending", phone: "010-3749-1986", customerType: "지정", visitInfo: "최근 13일 전 (10/31)", memo: "", bookingMemo: "" },
+          { id: 106, period: "오후", time: "1:30", name: "백차홍님", service: "아이롱 (남) + 새치 염색 (남) + 두피 크리닉 (남성)", price: 100000, status: "pending", phone: "010-5161-5070", customerType: "지정", visitInfo: "최근 17일 전 (10/27)", memo: "", bookingMemo: "" },
+          { id: 107, period: "오후", time: "4:00", name: "강동우님", service: "남자컷", price: 12000, status: "pending", phone: "010-4841-4893", customerType: "지정", visitInfo: "최근 19일 전 (10/25)", memo: "", bookingMemo: "" },
+          { id: 108, period: "오후", time: "4:30", name: "이연주님", service: "남자컷", price: 12000, status: "pending", phone: "010-8650-6371", customerType: "지정", visitInfo: "최근 54일 전 (09/20)", memo: "", bookingMemo: "" },
+          { id: 109, period: "오후", time: "5:00", name: "이연주님", service: "남학생컷", price: 10000, status: "pending", phone: "010-8650-6371", customerType: "지정", visitInfo: "최근 54일 전 (09/20)", memo: "", bookingMemo: "" },
+          { id: 110, period: "오후", time: "5:30", name: "천성철님", service: "남자컷", price: 12000, status: "pending", phone: "010-4544-7689", customerType: "지정", visitInfo: "최근 48일 전 (09/26)", memo: "", bookingMemo: "" },
+          { id: 111, period: "오후", time: "6:30", name: "유경민님", service: "남자컷", price: 12000, status: "pending", phone: "010-5003-1854", customerType: "지정", visitInfo: "최근 14일 전 (10/30)", memo: "", bookingMemo: "" }
         ]
       },
       dayafter: {
         dateLabel: "11월 15일 일요일",
         reservations: [
-          { id: 201, period: "오전", time: "10:00", name: "신홍주님", service: "남자컷 + 샴푸 (남성)", price: 17000, status: "pending", phone: "010-6282-9704", customerType: "지정", visitInfo: "최근 20일 전 (10/24)", memo: "남자컷 + 두피 샴푸 케어", bookingMemo: "매장 예약 · 현장결제" },
-          { id: 202, period: "오후", time: "2:00", name: "이지영님", service: "남자컷", price: 12000, status: "pending", phone: "010-7172-6334", customerType: "지정", visitInfo: "최근 10일 전 (11/03)", memo: "10일 주기 방문 · 가벼운 질감 정리 컷", bookingMemo: "매장 예약 · 현장결제" },
-          { id: 203, period: "오후", time: "3:00", name: "신초롱님", service: "남자컷", price: 12000, status: "pending", phone: "010-3755-6293", customerType: "지정", visitInfo: "최근 33일 전 (10/11)", memo: "자연스러운 댄디 스타일 컷", bookingMemo: "매장 예약 · 현장결제" }
+          { id: 201, period: "오전", time: "10:00", name: "신홍주님", service: "남자컷 + 샴푸 (남성)", price: 17000, status: "pending", phone: "010-6282-9704", customerType: "지정", visitInfo: "최근 20일 전 (10/24)", memo: "", bookingMemo: "" },
+          { id: 202, period: "오후", time: "2:00", name: "이지영님", service: "남자컷", price: 12000, status: "pending", phone: "010-7172-6334", customerType: "지정", visitInfo: "최근 10일 전 (11/03)", memo: "", bookingMemo: "" },
+          { id: 203, period: "오후", time: "3:00", name: "신초롱님", service: "남자컷", price: 12000, status: "pending", phone: "010-3755-6293", customerType: "지정", visitInfo: "최근 33일 전 (10/11)", memo: "", bookingMemo: "" }
         ]
       }
     };
@@ -293,7 +293,7 @@
       renderReservations();
     }
 
-    // FLOATING MEMO POPUP LOGIC (클릭 시 플로팅 카드 열림, 재클릭 시 아무 곳이나 닫힘)
+    // FLOATING MEMO POPUP LOGIC: 클릭 시 모달 열림, 메모 공란 시 '특이사항 없음' 표시, 아무 곳이나 클릭 시 닫힘
     function openMemo(id, event) {
       if (event) {
         event.stopPropagation();
@@ -301,6 +301,9 @@
       const dayData = DATA[currentDay];
       const item = dayData.reservations.find(r => r.id === id);
       if (!item) return;
+
+      const hasMemo = item.memo && item.memo.trim().length > 0;
+      const memoText = hasMemo ? item.memo.trim() : '특이사항 없음';
 
       const card = document.getElementById('memoFloatingCard');
       card.innerHTML = `
@@ -315,16 +318,16 @@
           <button onclick="closeMemo()" class="text-gray-400 hover:text-white p-1 rounded-lg bg-dark-bg border border-dark-border text-xs leading-none">✕</button>
         </div>
 
-        <!-- HandSOS 고객 특이사항 메모 (핵심) -->
-        <div class="bg-amber-950/40 border border-amber-500/60 rounded-xl p-3 text-left shadow-inner">
-          <div class="text-[11px] font-bold text-amber-400 flex items-center space-x-1.5 mb-1.5">
-            <svg class="w-3.5 h-3.5 text-amber-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <!-- HandSOS 고객 특이사항 메모 (실제 CRM 메모 데이터만 출력, 공란 시 '특이사항 없음') -->
+        <div class="${hasMemo ? 'bg-amber-950/40 border-amber-500/60' : 'bg-dark-bg/90 border-dark-border'} border rounded-xl p-3 text-left shadow-inner">
+          <div class="text-[11px] font-bold ${hasMemo ? 'text-amber-400' : 'text-gray-400'} flex items-center space-x-1.5 mb-1.5">
+            <svg class="w-3.5 h-3.5 ${hasMemo ? 'text-amber-400' : 'text-gray-500'} shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
             </svg>
             <span>고객 특이사항 메모</span>
           </div>
-          <div class="text-sm sm:text-base font-extrabold text-amber-200 tracking-wide break-words leading-relaxed">
-            ${item.memo ? item.memo : '등록된 고객 특이사항 메모가 없습니다.'}
+          <div class="text-sm sm:text-base ${hasMemo ? 'font-black text-amber-200' : 'font-semibold text-gray-400'} tracking-wide break-words leading-relaxed">
+            ${memoText}
           </div>
         </div>
 
@@ -352,7 +355,6 @@
       card.classList.remove('scale-95');
       card.classList.add('scale-100');
       
-      // 약간의 지연 후 전역 닫기 리스너 활성화 (현재 클릭 이벤트 전파와 분리)
       setTimeout(() => {
         isMemoOpen = true;
       }, 50);
@@ -406,7 +408,7 @@
       }
 
       container.innerHTML = list.map(item => {
-        // Customer Type Badge
+        // Customer Type Badge (지정 우측의 메모 아이콘은 지시에 따라 완전히 제거)
         const cType = item.customerType || item.customer_type || '';
         const isDesignated = cType.includes('지정');
         const isNew = cType.includes('신규');
@@ -417,10 +419,9 @@
           : `<span class="px-2 py-0.5 rounded-md text-[11px] font-medium bg-gray-800 text-gray-400 shrink-0">미지정</span>`;
 
         const visitInfoText = item.visitInfo || item.visit_info || '';
-        const memoBadge = item.memo ? `<span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-amber-950/80 text-amber-300 border border-amber-700/80 shrink-0 flex items-center space-x-0.5"><span>📝</span><span>메모</span></span>` : '';
 
         return `
-          <div onclick="openMemo(${item.id}, event)" class="bg-dark-card border border-dark-border hover:border-amber-500/60 hover:bg-dark-cardHover rounded-2xl p-3.5 flex items-center justify-between gap-3 transition cursor-pointer active:scale-[0.98] select-none group">
+          <div onclick="openMemo(${item.id}, event)" class="bg-dark-card border border-dark-border hover:border-gray-500/80 hover:bg-dark-cardHover rounded-2xl p-3.5 flex items-center justify-between gap-3 transition cursor-pointer active:scale-[0.98] select-none group">
             
             <!-- Left: Time (Yellow/Gold 大형 폰트: text-2xl/3xl) -->
             <div class="w-20 shrink-0 text-left">
@@ -428,26 +429,17 @@
               <div class="text-2xl sm:text-3xl font-black font-mono tracking-tight text-accent-yellow mt-0.5">${item.time}</div>
             </div>
 
-            <!-- Middle: Customer Name (text-lg/xl font-extrabold), Badge, Memo Preview, Visit Interval, Phone -->
+            <!-- Middle: Customer Name (text-lg/xl font-extrabold), Badge, Visit Interval, Phone (메모 아이콘 없음) -->
             <div class="flex-1 min-w-0 pr-1">
               <div class="flex items-center space-x-1.5 flex-wrap gap-y-1">
                 <span class="font-extrabold text-lg sm:text-xl text-white tracking-tight truncate group-hover:text-amber-300 transition-colors">${item.name}</span>
                 ${typeBadge}
-                ${memoBadge}
               </div>
               
               <!-- 방문 주기 -->
               <div class="text-xs text-gray-300 font-medium mt-1 truncate">
                 ${visitInfoText}
               </div>
-
-              <!-- 메모 미리보기 (있을 경우 간략 노출) -->
-              ${item.memo ? `
-              <div class="text-[11px] text-amber-400/90 font-medium mt-0.5 truncate flex items-center space-x-1">
-                <svg class="w-2.5 h-2.5 text-amber-400 shrink-0 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                <span class="truncate">${item.memo}</span>
-              </div>
-              ` : ''}
 
               <!-- 연락처: 가독성을 낮춘 어두운 회색 계열 (#71717a), 클릭 시 전화 연결(모달 버블링 방지) -->
               <div class="text-[11px] text-zinc-500 font-mono mt-1 flex items-center space-x-1" onclick="event.stopPropagation()">
