@@ -1,11 +1,12 @@
 {
-  "updated_at": "2026-11-13T02:32:00+09:00",
+  "updated_at": "2026-11-13T08:52:00+09:00",
   "today": {
     "date": "2026-11-13",
     "day_label": "11월 13일 금요일",
-    "total_count": 11,
-    "total_revenue": 212000,
+    "total_count": 12,
+    "total_revenue": 224000,
     "reservations": [
+      { "id": 0, "time": "10:00", "period": "오전", "name": "조용훈님", "phone": "010-2544-3728", "service": "남자컷", "price": 12000, "pay": "현장결제", "assigned": true, "customer_type": "지정", "visit_info": "최근 34일 전 (10/10)", "status": "pending", "memo": "", "booking_memo": "네이버 예약건 · 미결제금액 12,000원 · 디자이너 지정" },
       { "id": 1, "time": "10:30", "period": "오전", "name": "김세웅님", "phone": "010-3306-7852", "service": "남자컷 + 아이롱 (남)", "price": 67000, "pay": "N-Pay 현장결제", "assigned": false, "customer_type": "미지정", "visit_info": "최근 52일 전 (09/22)", "status": "pending", "memo": "블랙/9mm투블럭상고", "booking_memo": "네이버 예약건 · 잔여금 N-Pay 현장결제 (67,000원)" },
       { "id": 2, "time": "12:00", "period": "오후", "name": "정의영님", "phone": "010-4402-3263", "service": "남자컷 + 새치 염색 (남)", "price": 32000, "pay": "N-Pay 현장결제", "assigned": true, "customer_type": "지정", "visit_info": "최근 24일 전 (10/20)", "status": "pending", "memo": "", "booking_memo": "네이버 예약건 · 잔여금 N-Pay 현장결제 (32,000원)" },
       { "id": 3, "time": "3:30", "period": "오후", "name": "기태원님", "phone": "010-6470-2589", "service": "남자컷", "price": 12000, "pay": "현장결제", "assigned": true, "customer_type": "지정", "visit_info": "최근 21일 전 (10/23)", "status": "pending", "memo": "", "booking_memo": "" },

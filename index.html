@@ -108,7 +108,7 @@
 
       <!-- Next Customer Status Subheader -->
       <div class="flex items-center justify-between text-xs px-1 text-gray-400">
-        <span id="nextCustomerBanner" class="font-medium text-gray-300">다음 고객 김세웅님 · 대기 중</span>
+        <span id="nextCustomerBanner" class="font-medium text-gray-300">다음 고객 조용훈님 · 대기 중</span>
         <span id="syncStatus" class="text-[11px] text-emerald-500">실시간 연동</span>
       </div>
 
@@ -184,6 +184,7 @@
       today: {
         dateLabel: "11월 13일 금요일",
         reservations: [
+          { id: 0, period: "오전", time: "10:00", name: "조용훈님", service: "남자컷", price: 12000, status: "pending", phone: "010-2544-3728", customerType: "지정", visitInfo: "최근 34일 전 (10/10)", memo: "", bookingMemo: "네이버 예약건 · 미결제금액 12,000원 · 디자이너 지정" },
           { id: 1, period: "오전", time: "10:30", name: "김세웅님", service: "남자컷 + 아이롱 (남)", price: 67000, status: "pending", phone: "010-3306-7852", customerType: "미지정", visitInfo: "최근 52일 전 (09/22)", memo: "블랙/9mm투블럭상고", bookingMemo: "네이버 예약건 · 잔여금 N-Pay 현장결제 (67,000원)" },
           { id: 2, period: "오후", time: "12:00", name: "정의영님", service: "남자컷 + 새치 염색 (남)", price: 32000, status: "pending", phone: "010-4402-3263", customerType: "지정", visitInfo: "최근 24일 전 (10/20)", memo: "", bookingMemo: "네이버 예약건 · 잔여금 N-Pay 현장결제 (32,000원)" },
           { id: 3, period: "오후", time: "3:30", name: "기태원님", service: "남자컷", price: 12000, status: "pending", phone: "010-6470-2589", customerType: "지정", visitInfo: "최근 21일 전 (10/23)", memo: "", bookingMemo: "" },
@@ -255,7 +256,7 @@
       }
     }
 
-    // MAIN CLOCK LOGIC
+    // MAIN CLOCK LOGIC: 당일 예약 목록 기반 동적 다음 고객 카운트다운
     function updateClock() {
       const now = new Date();
       const h = String(now.getHours()).padStart(2, '0');
@@ -263,16 +264,32 @@
       const s = String(now.getSeconds()).padStart(2, '0');
       document.getElementById('mainClock').innerText = `${h}:${m}:${s}`;
 
-      const target = new Date();
-      target.setHours(10, 30, 0, 0);
-      let diffMs = target - now;
-      if (diffMs > 0) {
-        const diffMin = Math.floor(diffMs / 60000);
-        document.getElementById('nextCustomerBanner').innerText = `다음 고객 김세웅님 · ${diffMin}분 남음`;
-        document.getElementById('timelineProgressText').innerText = `${h}:${m} · 다음 ${diffMin}분 후`;
+      // 다음 예정 고객 동적 탐색
+      let nextCustomer = null;
+      let nextDiffMin = 0;
+
+      for (const r of DATA.today.reservations) {
+        const parts = r.time.split(':');
+        let rHour = parseInt(parts[0], 10);
+        const rMin = parseInt(parts[1], 10);
+        if (r.period === '오후' && rHour < 12) {
+          rHour += 12;
+        }
+        const t = new Date(now.getFullYear(), now.getMonth(), now.getDate(), rHour, rMin, 0, 0);
+        const diff = t - now;
+        if (diff > 0) {
+          nextCustomer = r;
+          nextDiffMin = Math.floor(diff / 60000);
+          break;
+        }
+      }
+
+      if (nextCustomer) {
+        document.getElementById('nextCustomerBanner').innerText = `다음 고객 ${nextCustomer.name} · ${nextDiffMin}분 남음`;
+        document.getElementById('timelineProgressText').innerText = `${h}:${m} · 다음 ${nextDiffMin}분 후`;
       } else {
-        document.getElementById('nextCustomerBanner').innerText = `김세웅님 시술 시간 대기`;
-        document.getElementById('timelineProgressText').innerText = `${h}:${m} · 실시간 영업 대기`;
+        document.getElementById('nextCustomerBanner').innerText = `실시간 시술 진행 / 영업 대기`;
+        document.getElementById('timelineProgressText').innerText = `${h}:${m} · 영업 중`;
       }
     }
 
