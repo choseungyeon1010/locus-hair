@@ -3,25 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>LOCUS [승연] LIVE — 실시간 살롱 예약 대시보드</title>
+  <title>LOCUS [승연] PRO</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/static/pretendard.min.css">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
-      darkMode: 'class',
       theme: {
         extend: {
           fontFamily: {
             sans: ['Pretendard', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'sans-serif'],
           },
           colors: {
-            brand: {
-              50: '#f0fdf4',
-              100: '#dcfce7',
-              500: '#22c55e',
-              600: '#16a34a',
-              700: '#15803d',
-              900: '#14532d',
+            dark: {
+              bg: '#0c0d0e',
+              card: '#16181a',
+              cardHover: '#1c1e22',
+              border: '#26292d',
+            },
+            accent: {
+              green: '#22c55e',
+              greenDark: '#14532d',
+              greenLight: '#4ade80',
+              yellow: '#facc15',
+              yellowDark: '#ca8a04',
             }
           }
         }
@@ -29,7 +33,25 @@
     }
   </script>
   <style>
-    body { font-family: 'Pretendard', sans-serif; -webkit-tap-highlight-color: transparent; }
+    body {
+      font-family: 'Pretendard', sans-serif;
+      background-color: #0c0d0e;
+      color: #e5e7eb;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .sticky-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(12, 13, 14, 0.96);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .timer-active {
+      border-color: #22c55e !important;
+      background-color: rgba(34, 197, 94, 0.12) !important;
+      color: #4ade80 !important;
+    }
     .pulse-dot {
       animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
     }
@@ -39,390 +61,352 @@
     }
   </style>
 </head>
-<body class="bg-gray-50 text-gray-900 dark:bg-gray-950 dark:text-gray-100 min-h-screen transition-colors duration-200">
+<body class="min-h-screen pb-12 antialiased selection:bg-emerald-800 selection:text-white">
 
-  <!-- Header -->
-  <header class="sticky top-0 z-30 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 px-4 py-3">
-    <div class="max-w-4xl mx-auto flex items-center justify-between">
-      <div class="flex items-center space-x-3">
-        <div class="w-9 h-9 rounded-xl bg-brand-600 flex items-center justify-center text-white font-bold text-lg shadow-sm shadow-brand-600/30">
-          L
-        </div>
-        <div>
-          <div class="flex items-center space-x-2">
-            <h1 class="text-base font-bold tracking-tight">LOCUS [승연] LIVE</h1>
-            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800 dark:bg-emerald-950/80 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800">
-              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 mr-1.5 pulse-dot"></span>
-              REALTIME
-            </span>
-          </div>
-          <p class="text-xs text-gray-500 dark:text-gray-400">핸드SOS CRM 실시간 연동 모드 · V10.0</p>
-        </div>
-      </div>
-      <div class="flex items-center space-x-2">
-        <button id="themeToggleBtn" onclick="toggleTheme()" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition" title="화면 테마 변경">
-          <svg id="sunIcon" class="w-4 h-4 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
-          <svg id="moonIcon" class="w-4 h-4 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
-        </button>
-        <button onclick="refreshData()" class="flex items-center space-x-1 px-3 py-1.5 rounded-lg bg-gray-900 text-white dark:bg-white dark:text-gray-900 text-xs font-semibold hover:opacity-90 transition active:scale-95">
-          <svg id="refreshIcon" class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
-          <span class="hidden sm:inline">동기화</span>
-        </button>
-      </div>
+  <!-- Top App Brand Bar -->
+  <div class="px-4 py-2.5 max-w-md mx-auto flex items-center justify-between border-b border-dark-border bg-dark-bg">
+    <div class="flex items-center space-x-2">
+      <span class="text-sm font-bold tracking-tight text-white">LOCUS [승연] PRO</span>
     </div>
-  </header>
-
-  <!-- Main Container -->
-  <main class="max-w-4xl mx-auto px-4 py-5 space-y-5">
-
-    <!-- Date & Realtime Clock Bar -->
-    <div class="flex flex-col sm:flex-row sm:items-center justify-between bg-white dark:bg-gray-900 p-4 rounded-2xl border border-gray-200/80 dark:border-gray-800 shadow-sm gap-2">
-      <div class="flex items-center space-x-2">
-        <div class="p-2 rounded-xl bg-emerald-50 dark:bg-emerald-950/50 text-emerald-600 dark:text-emerald-400">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-        </div>
-        <div>
-          <div id="currentDateStr" class="text-sm font-bold">2026년 11월 13일 (금)</div>
-          <div class="text-xs text-gray-500 dark:text-gray-400">로커스헤어 · 승연 디자이너 전용 예약 뷰</div>
-        </div>
-      </div>
-      <div class="flex items-center justify-between sm:justify-end space-x-4">
-        <div class="text-right">
-          <div id="currentTimeStr" class="text-xl font-extrabold tracking-tight font-mono text-brand-600 dark:text-brand-400">00:00:00</div>
-          <div id="syncTimeStr" class="text-[11px] text-gray-400">동기화: 방금 전</div>
-        </div>
-      </div>
+    <div class="flex items-center space-x-2">
+      <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 shadow-sm shadow-emerald-500/50 pulse-dot"></span>
     </div>
+  </div>
 
-    <!-- KPI Summary Grid -->
-    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-      <div class="bg-white dark:bg-gray-900 p-4 rounded-2xl border border-gray-200/80 dark:border-gray-800 shadow-sm">
-        <span class="text-xs text-gray-500 dark:text-gray-400 font-medium">총 예약</span>
-        <div class="flex items-baseline space-x-1 mt-1">
-          <span id="kpiTotalCount" class="text-2xl font-bold">11</span>
-          <span class="text-xs text-gray-500">건</span>
+  <!-- STICKY TOP CONTAINER: Clock & Timers & Subheader (항상 상단 고정) -->
+  <div class="sticky-header border-b border-dark-border px-4 pt-3 pb-3">
+    <div class="max-w-md mx-auto space-y-2.5">
+      
+      <!-- Digital Clock Card -->
+      <div class="bg-dark-card border border-dark-border rounded-2xl p-3 text-center shadow-lg">
+        <div id="mainClock" class="text-4xl sm:text-5xl font-black font-mono tracking-wider text-white">
+          00:00:00
         </div>
-        <div class="text-[11px] text-gray-400 mt-1">지정 <span id="kpiAssignedCount" class="font-semibold text-gray-700 dark:text-gray-200">8</span> · 미지정 3</div>
+        
+        <!-- Timer A & Timer B (원클릭 시작, 재클릭 초기화) -->
+        <div class="grid grid-cols-2 gap-2 mt-2.5">
+          <button id="timerABtn" onclick="toggleTimer('A')" class="flex items-center justify-between px-3 py-2 rounded-xl bg-dark-bg border border-dark-border text-xs font-semibold text-gray-300 hover:border-gray-500 active:scale-95 transition">
+            <span class="text-gray-400">타이머 A</span>
+            <span id="timerADisplay" class="font-mono text-sm font-bold text-white">00:00</span>
+          </button>
+          <button id="timerBBtn" onclick="toggleTimer('B')" class="flex items-center justify-between px-3 py-2 rounded-xl bg-dark-bg border border-dark-border text-xs font-semibold text-gray-300 hover:border-gray-500 active:scale-95 transition">
+            <span class="text-gray-400">타이머 B</span>
+            <span id="timerBDisplay" class="font-mono text-sm font-bold text-white">00:00</span>
+          </button>
+        </div>
       </div>
 
-      <div class="bg-white dark:bg-gray-900 p-4 rounded-2xl border border-gray-200/80 dark:border-gray-800 shadow-sm">
-        <span class="text-xs text-gray-500 dark:text-gray-400 font-medium">총 예상 매출</span>
-        <div class="flex items-baseline space-x-1 mt-1">
-          <span id="kpiTotalRevenue" class="text-2xl font-bold text-emerald-600 dark:text-emerald-400">212,000</span>
-          <span class="text-xs text-gray-500">원</span>
-        </div>
-        <div class="text-[11px] text-gray-400 mt-1">객단가 ~19,270원</div>
+      <!-- Next Customer Status Subheader -->
+      <div class="flex items-center justify-between text-xs px-1 text-gray-400">
+        <span id="nextCustomerBanner" class="font-medium text-gray-300">다음 고객 김세웅님 · 대기 중</span>
+        <span id="syncStatus" class="text-[11px] text-emerald-500">실시간 연동</span>
       </div>
 
-      <div class="bg-white dark:bg-gray-900 p-4 rounded-2xl border border-gray-200/80 dark:border-gray-800 shadow-sm">
-        <span class="text-xs text-gray-500 dark:text-gray-400 font-medium">시술 완료</span>
-        <div class="flex items-baseline space-x-1 mt-1">
-          <span id="kpiDoneCount" class="text-2xl font-bold text-blue-600 dark:text-blue-400">0</span>
-          <span class="text-xs text-gray-500">/ 11건</span>
+    </div>
+  </div>
+
+  <!-- Main Scrollable Content -->
+  <main class="max-w-md mx-auto px-4 pt-3 space-y-3.5">
+
+    <!-- KPI Summary Cards (2 Columns: 총 예약 & 예상 매출 / 지정 & 미지정 현황) -->
+    <div class="grid grid-cols-2 gap-2.5">
+      <div class="bg-dark-card border border-dark-border rounded-2xl p-3.5">
+        <div class="text-[11px] text-gray-400 font-medium">당일 총 예약</div>
+        <div class="flex items-baseline space-x-1 mt-0.5">
+          <span id="kpiTotalCount" class="text-3xl font-extrabold text-emerald-400 font-mono">11</span>
+          <span class="text-xs text-gray-400">건</span>
         </div>
-        <div class="text-[11px] text-gray-400 mt-1">확정 <span id="kpiDoneRevenue" class="font-semibold text-gray-700 dark:text-gray-200">0</span>원</div>
+        <div class="text-[11px] text-gray-400 mt-0.5" id="kpiRevenueText">예상 매출 212,000원</div>
       </div>
 
-      <div class="bg-white dark:bg-gray-900 p-4 rounded-2xl border border-gray-200/80 dark:border-gray-800 shadow-sm">
-        <span class="text-xs text-gray-500 dark:text-gray-400 font-medium">현재 진행 상태</span>
-        <div id="kpiLiveStatus" class="mt-1 text-sm font-bold text-amber-600 dark:text-amber-400 flex items-center space-x-1">
-          <span class="w-2 h-2 rounded-full bg-amber-500 inline-block"></span>
-          <span>영업 준비 중</span>
+      <div class="bg-dark-card border border-dark-border rounded-2xl p-3.5">
+        <div class="text-[11px] text-gray-400 font-medium">고객 구분</div>
+        <div class="flex items-baseline space-x-1 mt-0.5">
+          <span id="kpiDesignatedCount" class="text-3xl font-extrabold text-white font-mono">8</span>
+          <span class="text-xs text-gray-400">건 지정</span>
         </div>
-        <div id="kpiNextBooking" class="text-[11px] text-gray-400 mt-1">첫 예약: 10:30 김세웅</div>
+        <div class="text-[11px] text-gray-400 mt-0.5" id="kpiUndesignatedText">미지정 3건</div>
       </div>
     </div>
 
-    <!-- Active Now Focus Card -->
-    <div id="activeNowCard" class="bg-gradient-to-r from-emerald-600 to-teal-700 text-white p-4 sm:p-5 rounded-2xl shadow-md flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-      <div>
-        <div class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-white/20 backdrop-blur-sm text-white mb-2">
-          <span class="w-1.5 h-1.5 rounded-full bg-white mr-1.5 pulse-dot"></span>
-          NEXT APPOINTMENT
+    <!-- Day Tabs: TODAY / TOMORROW / DAY AFTER -->
+    <div class="grid grid-cols-3 gap-1.5 p-1 bg-dark-card border border-dark-border rounded-2xl text-xs font-semibold">
+      <button id="dayTab-today" onclick="setDay('today')" class="py-2 rounded-xl text-center transition font-bold bg-emerald-950/80 text-emerald-400 border border-emerald-800">
+        <div>TODAY</div>
+        <div class="text-[11px] font-normal mt-0.5" id="todayTabCount">11건</div>
+      </button>
+      <button id="dayTab-tomorrow" onclick="setDay('tomorrow')" class="py-2 rounded-xl text-center text-gray-400 hover:text-gray-200 transition">
+        <div>TOMORROW</div>
+        <div class="text-[11px] font-normal mt-0.5" id="tomorrowTabCount">11건</div>
+      </button>
+      <button id="dayTab-dayafter" onclick="setDay('dayafter')" class="py-2 rounded-xl text-center text-gray-400 hover:text-gray-200 transition">
+        <div>DAY AFTER</div>
+        <div class="text-[11px] font-normal mt-0.5" id="dayafterTabCount">3건</div>
+      </button>
+    </div>
+
+    <!-- Current Date Heading & Timeline Bar -->
+    <div class="pt-1">
+      <div class="text-sm font-bold text-emerald-400" id="currentSectionDate">11월 13일 금요일</div>
+      
+      <!-- Red dot progress indicator line -->
+      <div class="flex items-center justify-between text-[11px] text-rose-400 mt-1 mb-1">
+        <div class="flex items-center space-x-1.5">
+          <span class="w-1.5 h-1.5 rounded-full bg-rose-500 inline-block"></span>
+          <span id="timelineProgressText">01:38 · 실시간 영업 대기</span>
         </div>
-        <div class="text-lg sm:text-xl font-bold" id="activeCustomerTitle">10:30 김세웅 님 (남자컷 + 아이롱)</div>
-        <div class="text-xs text-emerald-100 mt-0.5" id="activeCustomerSub">010-3306-**** · 67,000원 · N-Pay 현장결제</div>
       </div>
-      <div class="flex items-center space-x-2">
-        <a id="activeCallBtn" href="tel:0103306****" class="px-3.5 py-2 rounded-xl bg-white/10 hover:bg-white/20 backdrop-blur-sm text-xs font-semibold transition flex items-center space-x-1.5">
-          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
-          <span>통화</span>
-        </a>
-        <button onclick="markCurrentStart()" class="px-4 py-2 rounded-xl bg-white text-emerald-800 text-xs font-bold hover:bg-emerald-50 transition shadow-sm active:scale-95">
-          시술 시작
-        </button>
+      <div class="w-full bg-dark-card h-1 rounded-full overflow-hidden">
+        <div class="bg-gradient-to-r from-rose-500 to-amber-500 h-full w-1/4 rounded-full"></div>
       </div>
     </div>
 
-    <!-- Controls: Filter & Search -->
-    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-      <div class="flex items-center space-x-1 overflow-x-auto pb-1 sm:pb-0">
-        <button onclick="setFilter('all')" id="filter-all" class="filter-tab px-3 py-1.5 rounded-xl text-xs font-bold bg-gray-900 text-white dark:bg-white dark:text-gray-900 transition">
-          전체 (11)
-        </button>
-        <button onclick="setFilter('pending')" id="filter-pending" class="filter-tab px-3 py-1.5 rounded-xl text-xs font-semibold text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition">
-          대기 (<span id="countPending">11</span>)
-        </button>
-        <button onclick="setFilter('in_progress')" id="filter-in_progress" class="filter-tab px-3 py-1.5 rounded-xl text-xs font-semibold text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition">
-          시술중 (<span id="countProgress">0</span>)
-        </button>
-        <button onclick="setFilter('done')" id="filter-done" class="filter-tab px-3 py-1.5 rounded-xl text-xs font-semibold text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition">
-          완료 (<span id="countDone">0</span>)
-        </button>
-      </div>
-
-      <div class="relative w-full sm:w-64">
-        <input type="text" id="searchInput" oninput="renderList()" placeholder="고객명, 연락처, 시술 검색..." class="w-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl px-3.5 py-1.5 text-xs text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-brand-500 pl-8 transition">
-        <svg class="w-4 h-4 text-gray-400 absolute left-2.5 top-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-      </div>
-    </div>
-
-    <!-- Reservation Timeline List -->
-    <div id="reservationListContainer" class="space-y-2.5">
-      <!-- Dynamic render here -->
-    </div>
-
-    <!-- Action Bar / Footer Note -->
-    <div class="p-4 rounded-2xl bg-gray-100/80 dark:bg-gray-900/50 border border-gray-200/60 dark:border-gray-800/60 flex flex-col sm:flex-row sm:items-center justify-between text-xs text-gray-500 gap-3">
-      <div class="flex items-center space-x-2">
-        <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
-        <span>데이터 소스: HandSOS CRM 상세대기</span>
-      </div>
-      <div class="flex items-center space-x-3">
-        <button onclick="exportJSON()" class="hover:text-gray-900 dark:hover:text-gray-200 font-medium">JSON 내보내기</button>
-        <button onclick="resetDefaults()" class="hover:text-red-600 font-medium">초기화</button>
-      </div>
+    <!-- Reservation Cards List -->
+    <div id="reservationContainer" class="space-y-2.5 pt-1">
+      <!-- Dynamically generated list -->
     </div>
 
   </main>
 
   <script>
-    const INITIAL_RESERVATIONS = [
-      { id: 1, time: "10:30", name: "김세웅", phone: "010-3306-****", service: "남자컷 + 아이롱 (남)", price: 67000, pay: "N-Pay 현장결제", assigned: false, status: "pending", memo: "" },
-      { id: 2, time: "12:00", name: "정의영", phone: "010-4402-****", service: "남자컷 + 새치 염색 (남)", price: 32000, pay: "N-Pay 현장결제", assigned: true, status: "pending", memo: "" },
-      { id: 3, time: "15:30", name: "기태원", phone: "010-6470-****", service: "남자컷", price: 12000, pay: "현장결제", assigned: true, status: "pending", memo: "" },
-      { id: 4, time: "16:00", name: "황중필", phone: "010-6462-****", service: "남자컷", price: 12000, pay: "현장결제", assigned: true, status: "pending", memo: "" },
-      { id: 5, time: "16:30", name: "김정옥", phone: "010-7766-****", service: "남자컷", price: 12000, pay: "현장결제", assigned: false, status: "pending", memo: "" },
-      { id: 6, time: "17:00", name: "전호윤", phone: "010-6378-****", service: "남자컷", price: 12000, pay: "N-Pay 현장결제", assigned: true, status: "pending", memo: "" },
-      { id: 7, time: "17:30", name: "김영인", phone: "010-3200-****", service: "남자컷", price: 12000, pay: "현장결제", assigned: true, status: "pending", memo: "" },
-      { id: 8, time: "18:00", name: "장한서", phone: "010-7237-****", service: "남자컷", price: 12000, pay: "현장결제", assigned: true, status: "pending", memo: "" },
-      { id: 9, time: "18:30", name: "김일철", phone: "010-8620-****", service: "남자컷", price: 12000, pay: "현장결제", assigned: false, status: "pending", memo: "" },
-      { id: 10, time: "19:00", name: "김이현", phone: "010-2722-****", service: "남자컷", price: 12000, pay: "현장결제", assigned: true, status: "pending", memo: "" },
-      { id: 11, time: "19:30", name: "최성호", phone: "010-6281-****", service: "남자컷 + 샴푸 (남성)", price: 17000, pay: "현장결제", assigned: true, status: "pending", memo: "" }
-    ];
-
-    let reservations = [];
-    let currentFilter = 'all';
-
-    function initData() {
-      const saved = localStorage.getItem('locus_reservations_20261113');
-      if (saved) {
-        try { reservations = JSON.parse(saved); } catch(e) { reservations = [...INITIAL_RESERVATIONS]; }
-      } else {
-        reservations = [...INITIAL_RESERVATIONS];
-        saveData();
+    // Embedded Data Feed with 100% Unmasked Phone Numbers & Enhanced Typography
+    const DATA = {
+      today: {
+        dateLabel: "11월 13일 금요일",
+        reservations: [
+          { id: 1, period: "오전", time: "10:30", name: "김세웅님", service: "남자컷 + 아이롱 (남)", price: 67000, status: "pending", phone: "010-3306-7852", customerType: "미지정", visitInfo: "최근 52일 전 (09/22)" },
+          { id: 2, period: "오후", time: "12:00", name: "정의영님", service: "남자컷 + 새치 염색 (남)", price: 32000, status: "pending", phone: "010-4402-3263", customerType: "지정", visitInfo: "최근 24일 전 (10/20)" },
+          { id: 3, period: "오후", time: "3:30", name: "기태원님", service: "남자컷", price: 12000, status: "pending", phone: "010-6470-2589", customerType: "지정", visitInfo: "최근 21일 전 (10/23)" },
+          { id: 4, period: "오후", time: "4:00", name: "황중필님", service: "남자컷", price: 12000, status: "pending", phone: "010-6462-5943", customerType: "지정", visitInfo: "최근 1일 전 (11/12)" },
+          { id: 5, period: "오후", time: "4:30", name: "김정옥님", service: "남자컷", price: 12000, status: "pending", phone: "010-7766-9959", customerType: "미지정", visitInfo: "최근 31일 전 (10/13)" },
+          { id: 6, period: "오후", time: "5:00", name: "전호윤님", service: "남자컷", price: 12000, status: "pending", phone: "010-6378-7069", customerType: "지정", visitInfo: "최근 39일 전 (10/05)" },
+          { id: 7, period: "오후", time: "5:30", name: "김영인님", service: "남자컷", price: 12000, status: "pending", phone: "010-3200-5500", customerType: "지정", visitInfo: "최근 23일 전 (10/21)" },
+          { id: 8, period: "오후", time: "6:00", name: "장한서님", service: "남자컷", price: 12000, status: "pending", phone: "010-7237-2200", customerType: "지정", visitInfo: "최근 32일 전 (10/12)" },
+          { id: 9, period: "오후", time: "6:30", name: "김일철님", service: "남자컷", price: 12000, status: "pending", phone: "010-8620-2850", customerType: "미지정", visitInfo: "최근 9일 전 (11/04)" },
+          { id: 10, period: "오후", time: "7:00", name: "김이현님", service: "남자컷", price: 12000, status: "pending", phone: "010-2722-7133", customerType: "지정", visitInfo: "최근 24일 전 (10/20)" },
+          { id: 11, period: "오후", time: "7:30", name: "최성호님", service: "남자컷 + 샴푸 (남성)", price: 17000, status: "pending", phone: "010-6281-5616", customerType: "지정", visitInfo: "최근 31일 전 (10/13)" }
+        ]
+      },
+      tomorrow: {
+        dateLabel: "11월 14일 토요일",
+        reservations: [
+          { id: 101, period: "오전", time: "10:00", name: "권명진님", service: "남자컷 + 새치 염색 (남)", price: 32000, status: "pending", phone: "010-8570-1931", customerType: "지정", visitInfo: "최근 41일 전 (10/03)" },
+          { id: 102, period: "오전", time: "10:30", name: "김성수님", service: "남자컷", price: 12000, status: "pending", phone: "010-7239-4678", customerType: "신규/지정", visitInfo: "첫 방문 (신규)" },
+          { id: 103, period: "오전", time: "11:00", name: "방성호님", service: "남자컷 + 샴푸 (남성)", price: 17000, status: "pending", phone: "010-9676-9657", customerType: "지정", visitInfo: "최근 69일 전 (09/05)" },
+          { id: 104, period: "오후", time: "12:00", name: "전지영님", service: "남학생컷", price: 10000, status: "pending", phone: "010-5439-1484", customerType: "지정", visitInfo: "최근 41일 전 (10/03)" },
+          { id: 105, period: "오후", time: "1:00", name: "박철우님", service: "새치 염색 (남)", price: 20000, status: "pending", phone: "010-3749-1986", customerType: "지정", visitInfo: "최근 13일 전 (10/31)" },
+          { id: 106, period: "오후", time: "1:30", name: "백차홍님", service: "아이롱 (남) + 새치 염색 (남) + 두피 크리닉 (남성)", price: 100000, status: "pending", phone: "010-5161-5070", customerType: "지정", visitInfo: "최근 17일 전 (10/27)" },
+          { id: 107, period: "오후", time: "4:00", name: "강동우님", service: "남자컷", price: 12000, status: "pending", phone: "010-4841-4893", customerType: "지정", visitInfo: "최근 19일 전 (10/25)" },
+          { id: 108, period: "오후", time: "4:30", name: "이연주님", service: "남자컷", price: 12000, status: "pending", phone: "010-8650-6371", customerType: "지정", visitInfo: "최근 54일 전 (09/20)" },
+          { id: 109, period: "오후", time: "5:00", name: "이연주님", service: "남학생컷", price: 10000, status: "pending", phone: "010-8650-6371", customerType: "지정", visitInfo: "최근 54일 전 (09/20)" },
+          { id: 110, period: "오후", time: "5:30", name: "천성철님", service: "남자컷", price: 12000, status: "pending", phone: "010-4544-7689", customerType: "지정", visitInfo: "최근 48일 전 (09/26)" },
+          { id: 111, period: "오후", time: "6:30", name: "유경민님", service: "남자컷", price: 12000, status: "pending", phone: "010-5003-1854", customerType: "지정", visitInfo: "최근 14일 전 (10/30)" }
+        ]
+      },
+      dayafter: {
+        dateLabel: "11월 15일 일요일",
+        reservations: [
+          { id: 201, period: "오전", time: "10:00", name: "신홍주님", service: "남자컷 + 샴푸 (남성)", price: 17000, status: "pending", phone: "010-6282-9704", customerType: "지정", visitInfo: "최근 20일 전 (10/24)" },
+          { id: 202, period: "오후", time: "2:00", name: "이지영님", service: "남자컷", price: 12000, status: "pending", phone: "010-7172-6334", customerType: "지정", visitInfo: "최근 10일 전 (11/03)" },
+          { id: 203, period: "오후", time: "3:00", name: "신초롱님", service: "남자컷", price: 12000, status: "pending", phone: "010-3755-6293", customerType: "지정", visitInfo: "최근 33일 전 (10/11)" }
+        ]
       }
-      renderList();
-      updateClock();
-      setInterval(updateClock, 1000);
+    };
+
+    let currentDay = 'today';
+
+    // TIMERS LOGIC: 클릭 시 시작, 재클릭 시 00:00 초기화
+    const timers = {
+      A: { seconds: 0, interval: null, running: false },
+      B: { seconds: 0, interval: null, running: false }
+    };
+
+    function toggleTimer(name) {
+      const t = timers[name];
+      const btn = document.getElementById(`timer${name}Btn`);
+      const disp = document.getElementById(`timer${name}Display`);
+
+      if (!t.running) {
+        t.running = true;
+        btn.classList.add('timer-active');
+        t.interval = setInterval(() => {
+          t.seconds++;
+          const m = String(Math.floor(t.seconds / 60)).padStart(2, '0');
+          const s = String(t.seconds % 60).padStart(2, '0');
+          disp.innerText = `${m}:${s}`;
+        }, 1000);
+      } else {
+        t.running = false;
+        clearInterval(t.interval);
+        t.seconds = 0;
+        disp.innerText = "00:00";
+        btn.classList.remove('timer-active');
+      }
     }
 
-    function saveData() {
-      localStorage.setItem('locus_reservations_20261113', JSON.stringify(reservations));
-      updateKPI();
-    }
-
+    // MAIN CLOCK LOGIC
     function updateClock() {
       const now = new Date();
       const h = String(now.getHours()).padStart(2, '0');
       const m = String(now.getMinutes()).padStart(2, '0');
       const s = String(now.getSeconds()).padStart(2, '0');
-      document.getElementById('currentTimeStr').innerText = `${h}:${m}:${s}`;
-    }
+      document.getElementById('mainClock').innerText = `${h}:${m}:${s}`;
 
-    function toggleTheme() {
-      document.documentElement.classList.toggle('dark');
-      localStorage.setItem('locus_theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
-    }
-
-    if (localStorage.getItem('locus_theme') === 'dark' || (!localStorage.getItem('locus_theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      document.documentElement.classList.add('dark');
-    }
-
-    function setFilter(filter) {
-      currentFilter = filter;
-      document.querySelectorAll('.filter-tab').forEach(el => {
-        el.className = 'filter-tab px-3 py-1.5 rounded-xl text-xs font-semibold text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition';
-      });
-      const activeBtn = document.getElementById(`filter-${filter}`);
-      if (activeBtn) {
-        activeBtn.className = 'filter-tab px-3 py-1.5 rounded-xl text-xs font-bold bg-gray-900 text-white dark:bg-white dark:text-gray-900 transition';
+      const target = new Date();
+      target.setHours(10, 30, 0, 0);
+      let diffMs = target - now;
+      if (diffMs > 0) {
+        const diffMin = Math.floor(diffMs / 60000);
+        document.getElementById('nextCustomerBanner').innerText = `다음 고객 김세웅님 · ${diffMin}분 남음`;
+        document.getElementById('timelineProgressText').innerText = `${h}:${m} · 다음 ${diffMin}분 후`;
+      } else {
+        document.getElementById('nextCustomerBanner').innerText = `김세웅님 시술 시간 대기`;
+        document.getElementById('timelineProgressText').innerText = `${h}:${m} · 실시간 영업 대기`;
       }
-      renderList();
     }
 
-    function updateKPI() {
-      const total = reservations.length;
-      const assigned = reservations.filter(r => r.assigned).length;
-      const totalRevenue = reservations.reduce((acc, cur) => acc + cur.price, 0);
-      const doneItems = reservations.filter(r => r.status === 'done');
-      const doneCount = doneItems.length;
-      const doneRevenue = doneItems.reduce((acc, cur) => acc + cur.price, 0);
-      const pendingCount = reservations.filter(r => r.status === 'pending').length;
-      const progressCount = reservations.filter(r => r.status === 'in_progress').length;
+    function setDay(dayKey) {
+      currentDay = dayKey;
+      ['today', 'tomorrow', 'dayafter'].forEach(d => {
+        const btn = document.getElementById(`dayTab-${d}`);
+        if (d === dayKey) {
+          btn.className = "py-2 rounded-xl text-center transition font-bold bg-emerald-950/80 text-emerald-400 border border-emerald-800";
+        } else {
+          btn.className = "py-2 rounded-xl text-center text-gray-400 hover:text-gray-200 transition";
+        }
+      });
+
+      document.getElementById('currentSectionDate').innerText = DATA[dayKey].dateLabel;
+      renderReservations();
+    }
+
+    function renderReservations() {
+      const dayData = DATA[currentDay];
+      const list = dayData.reservations;
+
+      const total = list.length;
+      const totalRev = list.reduce((acc, r) => acc + (r.price || 0), 0);
+      const designatedCount = list.filter(r => (r.customerType || r.customer_type || '').includes('지정')).length;
+      const undesignatedCount = total - designatedCount;
 
       document.getElementById('kpiTotalCount').innerText = total;
-      document.getElementById('kpiAssignedCount').innerText = assigned;
-      document.getElementById('kpiTotalRevenue').innerText = totalRevenue.toLocaleString();
-      document.getElementById('kpiDoneCount').innerText = doneCount;
-      document.getElementById('kpiDoneRevenue').innerText = doneRevenue.toLocaleString();
+      document.getElementById('kpiRevenueText').innerText = `예상 매출 ${totalRev.toLocaleString()}원`;
+      document.getElementById('kpiDesignatedCount').innerText = designatedCount;
+      document.getElementById('kpiUndesignatedText').innerText = `미지정 ${undesignatedCount}건`;
 
-      document.getElementById('countPending').innerText = pendingCount;
-      document.getElementById('countProgress').innerText = progressCount;
-      document.getElementById('countDone').innerText = doneCount;
+      document.getElementById('todayTabCount').innerText = `${DATA.today.reservations.length}건`;
+      document.getElementById('tomorrowTabCount').innerText = `${DATA.tomorrow.reservations.length}건`;
+      document.getElementById('dayafterTabCount').innerText = `${DATA.dayafter.reservations.length}건`;
+      document.getElementById('currentSectionDate').innerText = DATA[currentDay].dateLabel;
 
-      // Update active card
-      const inProg = reservations.find(r => r.status === 'in_progress');
-      const nextPend = reservations.find(r => r.status === 'pending');
-      const activeCard = inProg || nextPend;
-
-      if (activeCard) {
-        document.getElementById('activeCustomerTitle').innerText = `${activeCard.time} ${activeCard.name} 님 (${activeCard.service})`;
-        document.getElementById('activeCustomerSub').innerText = `${activeCard.phone} · ${activeCard.price.toLocaleString()}원 · ${activeCard.pay}`;
-        document.getElementById('activeCallBtn').href = `tel:${activeCard.phone.replace(/-/g, '')}`;
-      }
-    }
-
-    function setStatus(id, newStatus) {
-      const target = reservations.find(r => r.id === id);
-      if (target) {
-        target.status = newStatus;
-        saveData();
-        renderList();
-      }
-    }
-
-    function markCurrentStart() {
-      const nextPend = reservations.find(r => r.status === 'pending');
-      if (nextPend) {
-        setStatus(nextPend.id, 'in_progress');
-      }
-    }
-
-    function renderList() {
-      const container = document.getElementById('reservationListContainer');
-      const query = (document.getElementById('searchInput').value || '').toLowerCase().trim();
-
-      let list = reservations;
-      if (currentFilter !== 'all') {
-        list = list.filter(r => r.status === currentFilter);
-      }
-      if (query) {
-        list = list.filter(r => r.name.toLowerCase().includes(query) || r.phone.includes(query) || r.service.toLowerCase().includes(query));
-      }
-
+      const container = document.getElementById('reservationContainer');
       if (list.length === 0) {
         container.innerHTML = `
-          <div class="p-8 text-center bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800 text-gray-400 text-xs">
-            일치하는 예약 내역이 없습니다.
+          <div class="py-12 text-center text-gray-500 text-xs bg-dark-card rounded-2xl border border-dark-border">
+            예약이 없습니다.
           </div>
         `;
-        updateKPI();
         return;
       }
 
-      container.innerHTML = list.map(r => {
-        const isDone = r.status === 'done';
-        const isProgress = r.status === 'in_progress';
-        const statusBadge = isDone
-          ? '<span class="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-400">완료</span>'
-          : isProgress
-          ? '<span class="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-blue-100 text-blue-700 dark:bg-blue-950 dark:text-blue-300 border border-blue-200 dark:border-blue-800">시술중</span>'
-          : '<span class="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300">대기</span>';
+      container.innerHTML = list.map(item => {
+        // Customer Type Badge
+        const cType = item.customerType || item.customer_type || '';
+        const isDesignated = cType.includes('지정');
+        const isNew = cType.includes('신규');
+        const typeBadge = isNew
+          ? `<span class="px-2 py-0.5 rounded-md text-[11px] font-bold bg-amber-950 text-amber-300 border border-amber-800 shrink-0">신규</span>`
+          : isDesignated
+          ? `<span class="px-2 py-0.5 rounded-md text-[11px] font-bold bg-purple-950 text-purple-300 border border-purple-800 shrink-0">지정</span>`
+          : `<span class="px-2 py-0.5 rounded-md text-[11px] font-medium bg-gray-800 text-gray-400 shrink-0">미지정</span>`;
 
-        const assignBadge = r.assigned
-          ? '<span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-purple-100 text-purple-700 dark:bg-purple-950 dark:text-purple-300">지정</span>'
-          : '<span class="px-1.5 py-0.5 rounded text-[10px] font-medium bg-gray-100 text-gray-500 dark:bg-gray-800 dark:text-gray-400">미지정</span>';
+        const visitInfoText = item.visitInfo || item.visit_info || '';
 
         return `
-          <div class="bg-white dark:bg-gray-900 p-4 rounded-2xl border ${isProgress ? 'border-blue-400 dark:border-blue-700 ring-2 ring-blue-400/20' : 'border-gray-200/80 dark:border-gray-800'} shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3 transition">
-            <div class="flex items-start space-x-3">
-              <div class="w-14 text-center shrink-0 pt-0.5">
-                <span class="text-base font-extrabold font-mono text-gray-900 dark:text-gray-100">${r.time}</span>
+          <div class="bg-dark-card border border-dark-border rounded-2xl p-3.5 flex items-center justify-between gap-3 transition">
+            
+            <!-- Left: Time (Yellow/Gold 大형 폰트: text-2xl/3xl) -->
+            <div class="w-20 shrink-0 text-left">
+              <div class="text-xs font-semibold text-gray-400 tracking-wider">${item.period}</div>
+              <div class="text-2xl sm:text-3xl font-black font-mono tracking-tight text-accent-yellow mt-0.5">${item.time}</div>
+            </div>
+
+            <!-- Middle: Customer Name (text-lg/xl font-extrabold), Badge, Visit Interval, Dark Gray Phone -->
+            <div class="flex-1 min-w-0 pr-1">
+              <div class="flex items-center space-x-1.5 flex-wrap gap-y-1">
+                <span class="font-extrabold text-lg sm:text-xl text-white tracking-tight truncate">${item.name}</span>
+                ${typeBadge}
               </div>
-              <div class="space-y-1">
-                <div class="flex items-center space-x-2">
-                  <span class="font-bold text-sm text-gray-900 dark:text-gray-100">${r.name}</span>
-                  ${assignBadge}
-                  ${statusBadge}
-                </div>
-                <div class="text-xs text-gray-600 dark:text-gray-300 font-medium">
-                  ${r.service}
-                </div>
-                <div class="text-[11px] text-gray-400 flex items-center space-x-2">
-                  <span>${r.phone}</span>
-                  <span>·</span>
-                  <span class="font-semibold text-emerald-600 dark:text-emerald-400">${r.price.toLocaleString()}원</span>
-                  <span>·</span>
-                  <span>${r.pay}</span>
-                </div>
+              
+              <!-- 방문 주기 (말줄임 없이 자연스럽게 표출) -->
+              <div class="text-xs text-gray-300 font-medium mt-1 truncate">
+                ${visitInfoText}
+              </div>
+
+              <!-- 연락처: 중요도가 낮으므로 가독성을 낮춘 어두운 회색 계열 (#71717a) -->
+              <div class="text-[11px] text-zinc-500 font-mono mt-1 flex items-center space-x-1">
+                <svg class="w-3 h-3 text-zinc-600 inline shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                <a href="tel:${(item.phone || '').replace(/-/g, '')}" class="text-zinc-500 hover:text-zinc-300 transition tracking-wide font-normal">${item.phone || ''}</a>
               </div>
             </div>
 
-            <div class="flex items-center space-x-1.5 self-end sm:self-center shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-gray-100 dark:border-gray-800 w-full sm:w-auto justify-end">
-              <a href="tel:${r.phone.replace(/-/g, '')}" class="p-2 rounded-xl bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 text-xs font-semibold" title="고객 전화 연결">
-                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
-              </a>
-              ${!isProgress && !isDone ? `
-                <button onclick="setStatus(${r.id}, 'in_progress')" class="px-2.5 py-1.5 rounded-xl bg-blue-50 text-blue-700 dark:bg-blue-950 dark:text-blue-300 text-xs font-semibold hover:bg-blue-100 transition">
-                  시작
-                </button>
-              ` : ''}
-              ${!isDone ? `
-                <button onclick="setStatus(${r.id}, 'done')" class="px-2.5 py-1.5 rounded-xl bg-emerald-600 text-white text-xs font-semibold hover:bg-emerald-700 transition">
-                  완료
-                </button>
-              ` : `
-                <button onclick="setStatus(${r.id}, 'pending')" class="px-2.5 py-1.5 rounded-xl bg-gray-100 dark:bg-gray-800 text-gray-500 text-xs font-semibold hover:bg-gray-200 transition">
-                  대기 복원
-                </button>
-              `}
+            <!-- Right: Service Name & Green Total Price (말줄임 없이 자동 줄바꿈으로 전체 정보 표시, 시작/완료 버튼 완전 제거) -->
+            <div class="text-right shrink-0 max-w-[42%] flex flex-col justify-center">
+              <div class="text-xs font-semibold text-emerald-400 break-words leading-relaxed whitespace-normal">
+                ${item.service}
+              </div>
+              <div class="text-xs sm:text-sm font-extrabold text-emerald-400 font-mono mt-1 whitespace-nowrap">
+                총 ${item.price.toLocaleString()}원
+              </div>
             </div>
+
           </div>
         `;
       }).join('');
-
-      updateKPI();
     }
 
-    function refreshData() {
-      const icon = document.getElementById('refreshIcon');
-      icon.classList.add('animate-spin');
-      setTimeout(() => {
-        icon.classList.remove('animate-spin');
-        document.getElementById('syncTimeStr').innerText = '동기화: 방금 전';
-      }, 500);
+    // Auto fetch live json every 30s
+    async function fetchLiveFeed() {
+      try {
+        const res = await fetch('reservations_live.json?t=' + Date.now());
+        if (res.ok) {
+          const live = await res.json();
+          const normalize = (r) => ({
+            id: r.id,
+            period: r.period,
+            time: r.time,
+            name: r.name,
+            service: r.service,
+            price: r.price,
+            status: r.status,
+            phone: r.phone,
+            customerType: r.customer_type || r.customerType || (r.assigned ? '지정' : '미지정'),
+            visitInfo: r.visit_info || r.visitInfo || ''
+          });
+          if (live.today && live.today.reservations) {
+            DATA.today.reservations = live.today.reservations.map(normalize);
+            if (live.today.day_label) DATA.today.dateLabel = live.today.day_label;
+          }
+          if (live.tomorrow && live.tomorrow.reservations) {
+            DATA.tomorrow.reservations = live.tomorrow.reservations.map(normalize);
+            if (live.tomorrow.day_label) DATA.tomorrow.dateLabel = live.tomorrow.day_label;
+          }
+          if (live.dayafter && live.dayafter.reservations) {
+            DATA.dayafter.reservations = live.dayafter.reservations.map(normalize);
+            if (live.dayafter.day_label) DATA.dayafter.dateLabel = live.dayafter.day_label;
+          }
+          renderReservations();
+          document.getElementById('syncStatus').innerText = '자동 동기화 완료';
+        }
+      } catch (e) {}
     }
 
-    function exportJSON() {
-      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(reservations, null, 2));
-      const downloadAnchor = document.createElement('a');
-      downloadAnchor.setAttribute("href", dataStr);
-      downloadAnchor.setAttribute("download", "locus_reservations_20261113.json");
-      document.body.appendChild(downloadAnchor);
-      downloadAnchor.click();
-      downloadAnchor.remove();
-    }
-
-    function resetDefaults() {
-      if (confirm('초기 데이터로 되돌리시겠습니까?')) {
-        reservations = [...INITIAL_RESERVATIONS];
-        saveData();
-        renderList();
-      }
-    }
-
-    window.addEventListener('DOMContentLoaded', initData);
+    window.addEventListener('DOMContentLoaded', () => {
+      updateClock();
+      setInterval(updateClock, 1000);
+      renderReservations();
+      setInterval(fetchLiveFeed, 30000);
+    });
   </script>
 </body>
 </html>
