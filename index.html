@@ -108,7 +108,7 @@
 
       <!-- Next Customer Status Subheader -->
       <div class="flex items-center justify-between text-xs px-1 text-gray-400">
-        <span id="nextCustomerBanner" class="font-medium text-gray-300">다음 고객 조용훈님 · 대기 중</span>
+        <span id="nextCustomerBanner" class="font-medium text-gray-300">다음 고객 권명진님 · 대기 중</span>
         <span id="syncStatus" class="text-[11px] text-emerald-500">실시간 연동</span>
       </div>
 
@@ -126,16 +126,16 @@
           <span id="kpiTotalCount" class="text-3xl font-extrabold text-emerald-400 font-mono">13</span>
           <span class="text-xs text-gray-400">건</span>
         </div>
-        <div class="text-[11px] text-gray-400 mt-0.5" id="kpiRevenueText">예상 매출 241,000원</div>
+        <div class="text-[11px] text-gray-400 mt-0.5" id="kpiRevenueText">예상 매출 276,000원</div>
       </div>
 
       <div class="bg-dark-card border border-dark-border rounded-2xl p-3.5">
         <div class="text-[11px] text-gray-400 font-medium">고객 구분</div>
         <div class="flex items-baseline space-x-1 mt-0.5">
-          <span id="kpiDesignatedCount" class="text-3xl font-extrabold text-white font-mono">8</span>
+          <span id="kpiDesignatedCount" class="text-3xl font-extrabold text-white font-mono">13</span>
           <span class="text-xs text-gray-400">건 지정</span>
         </div>
-        <div class="text-[11px] text-gray-400 mt-0.5" id="kpiUndesignatedText">미지정 3건</div>
+        <div class="text-[11px] text-gray-400 mt-0.5" id="kpiUndesignatedText">미지정 0건</div>
       </div>
     </div>
 
@@ -147,17 +147,17 @@
       </button>
       <button id="dayTab-tomorrow" onclick="setDay('tomorrow')" class="py-2 rounded-xl text-center text-gray-400 hover:text-gray-200 transition">
         <div>TOMORROW</div>
-        <div class="text-[11px] font-normal mt-0.5" id="tomorrowTabCount">11건</div>
+        <div class="text-[11px] font-normal mt-0.5" id="tomorrowTabCount">6건</div>
       </button>
       <button id="dayTab-dayafter" onclick="setDay('dayafter')" class="py-2 rounded-xl text-center text-gray-400 hover:text-gray-200 transition">
         <div>DAY AFTER</div>
-        <div class="text-[11px] font-normal mt-0.5" id="dayafterTabCount">3건</div>
+        <div class="text-[11px] font-normal mt-0.5" id="dayafterTabCount">0건</div>
       </button>
     </div>
 
     <!-- Current Date Heading & Timeline Bar -->
     <div class="pt-1">
-      <div class="text-sm font-bold text-emerald-400" id="currentSectionDate">11월 13일 금요일</div>
+      <div class="text-sm font-bold text-emerald-400" id="currentSectionDate">11월 14일 토요일</div>
       
       <!-- Red dot progress indicator line -->
       <div class="flex items-center justify-between text-[11px] text-rose-400 mt-1 mb-1">
@@ -179,48 +179,41 @@
   </main>
 
   <script>
-    // Embedded Data Feed: HandSOS CRM 실측 기준 (김세웅 고객만 실제 메모 존재, 나머지 공란 고객은 '특이사항 없음')
+    // Embedded Data Feed: HandSOS CRM 실측 기준 (11/14 토 13건, 11/15 일 6건, 11/16 월 0건)
     const DATA = {
       today: {
-        dateLabel: "11월 13일 금요일",
+        dateLabel: "11월 14일 토요일",
         reservations: [
-          { id: 0, period: "오전", time: "10:00", name: "조용훈님", service: "남자컷", price: 12000, status: "pending", phone: "010-2544-3728", customerType: "지정", visitInfo: "최근 34일 전 (10/10)", memo: "", bookingMemo: "네이버 예약건 · 미결제금액 12,000원 · 디자이너 지정" },
-          { id: 1, period: "오전", time: "10:30", name: "김세웅님", service: "남자컷 + 아이롱 (남)", price: 67000, status: "pending", phone: "010-3306-7852", customerType: "미지정", visitInfo: "최근 52일 전 (09/22)", memo: "블랙/9mm투블럭상고", bookingMemo: "네이버 예약건 · 잔여금 N-Pay 현장결제 (67,000원)" },
-          { id: 2, period: "오후", time: "12:00", name: "정의영님", service: "남자컷 + 새치 염색 (남)", price: 32000, status: "pending", phone: "010-4402-3263", customerType: "지정", visitInfo: "최근 24일 전 (10/20)", memo: "", bookingMemo: "네이버 예약건 · 잔여금 N-Pay 현장결제 (32,000원)" },
-          { id: 12, period: "오후", time: "1:30", name: "안승현님", service: "남자컷 + 샴푸 (남성)", price: 17000, status: "pending", phone: "010-3173-5625", customerType: "지정", visitInfo: "최근 48일 전 (09/26)", memo: "", bookingMemo: "네이버 예약건 · 잔여금 N-Pay 현장결제 (17,000원) · 디자이너 지정" },
-          { id: 3, period: "오후", time: "3:30", name: "기태원님", service: "남자컷", price: 12000, status: "pending", phone: "010-6470-2589", customerType: "지정", visitInfo: "최근 21일 전 (10/23)", memo: "", bookingMemo: "" },
-          { id: 4, period: "오후", time: "4:00", name: "황중필님", service: "남자컷", price: 12000, status: "pending", phone: "010-6462-5943", customerType: "지정", visitInfo: "최근 1일 전 (11/12)", memo: "", bookingMemo: "" },
-          { id: 5, period: "오후", time: "4:30", name: "김정옥님", service: "남자컷", price: 12000, status: "pending", phone: "010-7766-9959", customerType: "미지정", visitInfo: "최근 31일 전 (10/13)", memo: "", bookingMemo: "" },
-          { id: 6, period: "오후", time: "5:00", name: "전호윤님", service: "남자컷", price: 12000, status: "pending", phone: "010-6378-7069", customerType: "지정", visitInfo: "최근 39일 전 (10/05)", memo: "", bookingMemo: "" },
-          { id: 7, period: "오후", time: "5:30", name: "김영인님", service: "남자컷", price: 12000, status: "pending", phone: "010-3200-5500", customerType: "지정", visitInfo: "최근 23일 전 (10/21)", memo: "", bookingMemo: "" },
-          { id: 8, period: "오후", time: "6:00", name: "장한서님", service: "남자컷", price: 12000, status: "pending", phone: "010-7237-2200", customerType: "지정", visitInfo: "최근 32일 전 (10/12)", memo: "", bookingMemo: "" },
-          { id: 9, period: "오후", time: "6:30", name: "김일철님", service: "남자컷", price: 12000, status: "pending", phone: "010-8620-2850", customerType: "미지정", visitInfo: "최근 9일 전 (11/04)", memo: "", bookingMemo: "" },
-          { id: 10, period: "오후", time: "7:00", name: "김이현님", service: "남자컷", price: 12000, status: "pending", phone: "010-2722-7133", customerType: "지정", visitInfo: "최근 24일 전 (10/20)", memo: "", bookingMemo: "" },
-          { id: 11, period: "오후", time: "7:30", name: "최성호님", service: "남자컷 + 샴푸 (남성)", price: 17000, status: "pending", phone: "010-6281-5616", customerType: "지정", visitInfo: "최근 31일 전 (10/13)", memo: "", bookingMemo: "" }
+          {"id": 101, "period": "오전", "time": "10:00", "name": "권명진님", "service": "남자컷 + 새치 염색 (남)", "price": 32000, "status": "pending", "phone": "010-8570-1931", "customerType": "지정", "visitInfo": "최근 42일 전 (10/03)", "memo": "", "bookingMemo": ""},
+          {"id": 102, "period": "오전", "time": "10:30", "name": "김성수님", "service": "남자컷", "price": 12000, "status": "pending", "phone": "010-7239-4678", "customerType": "신규/지정", "visitInfo": "첫 방문 (신규)", "memo": "", "bookingMemo": ""},
+          {"id": 103, "period": "오전", "time": "11:00", "name": "방성호님", "service": "남자컷 + 샴푸 (남성)", "price": 17000, "status": "pending", "phone": "010-9676-9657", "customerType": "지정", "visitInfo": "최근 70일 전 (09/05)", "memo": "", "bookingMemo": ""},
+          {"id": 104, "period": "오전", "time": "11:30", "name": "최원범님", "service": "남자컷 + 샴푸 (남성)", "price": 17000, "status": "pending", "phone": "010-7893-9136", "customerType": "지정", "visitInfo": "최근 9일 전 (11/05)", "memo": "", "bookingMemo": "네이버 예약건 · 미결제금액 17,000원 · 디자이너 지정"},
+          {"id": 105, "period": "오후", "time": "12:00", "name": "전지영님", "service": "남학생컷", "price": 10000, "status": "pending", "phone": "010-5439-1484", "customerType": "지정", "visitInfo": "최근 42일 전 (10/03)", "memo": "", "bookingMemo": ""},
+          {"id": 106, "period": "오후", "time": "1:00", "name": "박철우님", "service": "새치 염색 (남)", "price": 20000, "status": "pending", "phone": "010-3749-1986", "customerType": "지정", "visitInfo": "최근 14일 전 (10/31)", "memo": "", "bookingMemo": ""},
+          {"id": 107, "period": "오후", "time": "1:30", "name": "백차홍님", "service": "아이롱 (남) + 새치 염색 (남) + 두피 크리닉 (남성)", "price": 100000, "status": "pending", "phone": "010-5161-5070", "customerType": "지정", "visitInfo": "최근 18일 전 (10/27)", "memo": "", "bookingMemo": ""},
+          {"id": 108, "period": "오후", "time": "4:00", "name": "강동우님", "service": "남자컷", "price": 12000, "status": "pending", "phone": "010-4841-4893", "customerType": "지정", "visitInfo": "최근 20일 전 (10/25)", "memo": "", "bookingMemo": ""},
+          {"id": 109, "period": "오후", "time": "4:30", "name": "이연주님", "service": "남자컷", "price": 12000, "status": "pending", "phone": "010-8650-6371", "customerType": "지정", "visitInfo": "최근 55일 전 (09/20)", "memo": "", "bookingMemo": ""},
+          {"id": 110, "period": "오후", "time": "5:00", "name": "이연주님", "service": "남학생컷", "price": 10000, "status": "pending", "phone": "010-8650-6371", "customerType": "지정", "visitInfo": "최근 55일 전 (09/20)", "memo": "", "bookingMemo": ""},
+          {"id": 111, "period": "오후", "time": "5:30", "name": "천성철님", "service": "남자컷", "price": 12000, "status": "pending", "phone": "010-4544-7689", "customerType": "지정", "visitInfo": "최근 49일 전 (09/26)", "memo": "", "bookingMemo": ""},
+          {"id": 112, "period": "오후", "time": "6:00", "name": "이종인님", "service": "남학생컷", "price": 10000, "status": "pending", "phone": "010-8320-0945", "customerType": "지정", "visitInfo": "최근 22일 전 (10/23)", "memo": "어린이 입니다", "bookingMemo": "네이버 예약건 · 미결제금액 10,000원 · 디자이너 지정 · 요청사항: 어린이 입니다"},
+          {"id": 113, "period": "오후", "time": "6:30", "name": "유경민님", "service": "남자컷", "price": 12000, "status": "pending", "phone": "010-5003-1854", "customerType": "지정", "visitInfo": "최근 15일 전 (10/30)", "memo": "", "bookingMemo": ""}
         ]
       },
       tomorrow: {
-        dateLabel: "11월 14일 토요일",
+        dateLabel: "11월 15일 일요일",
         reservations: [
-          { id: 101, period: "오전", time: "10:00", name: "권명진님", service: "남자컷 + 새치 염색 (남)", price: 32000, status: "pending", phone: "010-8570-1931", customerType: "지정", visitInfo: "최근 41일 전 (10/03)", memo: "", bookingMemo: "" },
-          { id: 102, period: "오전", time: "10:30", name: "김성수님", service: "남자컷", price: 12000, status: "pending", phone: "010-7239-4678", customerType: "신규/지정", visitInfo: "첫 방문 (신규)", memo: "", bookingMemo: "" },
-          { id: 103, period: "오전", time: "11:00", name: "방성호님", service: "남자컷 + 샴푸 (남성)", price: 17000, status: "pending", phone: "010-9676-9657", customerType: "지정", visitInfo: "최근 69일 전 (09/05)", memo: "", bookingMemo: "" },
-          { id: 104, period: "오후", time: "12:00", name: "전지영님", service: "남학생컷", price: 10000, status: "pending", phone: "010-5439-1484", customerType: "지정", visitInfo: "최근 41일 전 (10/03)", memo: "", bookingMemo: "" },
-          { id: 105, period: "오후", time: "1:00", name: "박철우님", service: "새치 염색 (남)", price: 20000, status: "pending", phone: "010-3749-1986", customerType: "지정", visitInfo: "최근 13일 전 (10/31)", memo: "", bookingMemo: "" },
-          { id: 106, period: "오후", time: "1:30", name: "백차홍님", service: "아이롱 (남) + 새치 염색 (남) + 두피 크리닉 (남성)", price: 100000, status: "pending", phone: "010-5161-5070", customerType: "지정", visitInfo: "최근 17일 전 (10/27)", memo: "", bookingMemo: "" },
-          { id: 107, period: "오후", time: "4:00", name: "강동우님", service: "남자컷", price: 12000, status: "pending", phone: "010-4841-4893", customerType: "지정", visitInfo: "최근 19일 전 (10/25)", memo: "", bookingMemo: "" },
-          { id: 108, period: "오후", time: "4:30", name: "이연주님", service: "남자컷", price: 12000, status: "pending", phone: "010-8650-6371", customerType: "지정", visitInfo: "최근 54일 전 (09/20)", memo: "", bookingMemo: "" },
-          { id: 109, period: "오후", time: "5:00", name: "이연주님", service: "남학생컷", price: 10000, status: "pending", phone: "010-8650-6371", customerType: "지정", visitInfo: "최근 54일 전 (09/20)", memo: "", bookingMemo: "" },
-          { id: 110, period: "오후", time: "5:30", name: "천성철님", service: "남자컷", price: 12000, status: "pending", phone: "010-4544-7689", customerType: "지정", visitInfo: "최근 48일 전 (09/26)", memo: "", bookingMemo: "" },
-          { id: 111, period: "오후", time: "6:30", name: "유경민님", service: "남자컷", price: 12000, status: "pending", phone: "010-5003-1854", customerType: "지정", visitInfo: "최근 14일 전 (10/30)", memo: "", bookingMemo: "" }
+          {"id": 201, "period": "오전", "time": "10:00", "name": "신홍주님", "service": "남자컷 + 샴푸 (남성)", "price": 17000, "status": "pending", "phone": "010-6282-9704", "customerType": "지정", "visitInfo": "최근 21일 전 (10/24)", "memo": "", "bookingMemo": ""},
+          {"id": 202, "period": "오전", "time": "10:30", "name": "우영철님", "service": "아이롱펌 (남성)", "price": 55000, "status": "pending", "phone": "010-8593-3098", "customerType": "지정", "visitInfo": "최근 62일 전 (09/13)", "memo": "", "bookingMemo": "네이버 예약건 · 잔여금 N-Pay 현장결제 (55,000원) · 디자이너 지정"},
+          {"id": 203, "period": "오후", "time": "2:00", "name": "이지영님", "service": "남자컷", "price": 12000, "status": "pending", "phone": "010-7172-6334", "customerType": "지정", "visitInfo": "최근 11일 전 (11/03)", "memo": "", "bookingMemo": ""},
+          {"id": 204, "period": "오후", "time": "3:00", "name": "신초롱님", "service": "남자컷", "price": 12000, "status": "pending", "phone": "010-3755-6293", "customerType": "지정", "visitInfo": "최근 34일 전 (10/11)", "memo": "", "bookingMemo": ""},
+          {"id": 205, "period": "오후", "time": "3:30", "name": "손성훈님", "service": "일반펌 (남)", "price": 30000, "status": "pending", "phone": "010-7977-0760", "customerType": "지정", "visitInfo": "최근 22일 전 (10/23)", "memo": "", "bookingMemo": "네이버 예약건 · 미결제금액 30,000원 · 디자이너 지정"},
+          {"id": 206, "period": "오후", "time": "5:00", "name": "박지훈님", "service": "남자컷", "price": 12000, "status": "pending", "phone": "010-7698-2364", "customerType": "지정", "visitInfo": "최근 27일 전 (10/18)", "memo": "", "bookingMemo": "네이버 예약건 · 미결제금액 12,000원 · 디자이너 지정"}
         ]
       },
       dayafter: {
-        dateLabel: "11월 15일 일요일",
+        dateLabel: "11월 16일 월요일",
         reservations: [
-          { id: 201, period: "오전", time: "10:00", name: "신홍주님", service: "남자컷 + 샴푸 (남성)", price: 17000, status: "pending", phone: "010-6282-9704", customerType: "지정", visitInfo: "최근 20일 전 (10/24)", memo: "", bookingMemo: "" },
-          { id: 202, period: "오후", time: "2:00", name: "이지영님", service: "남자컷", price: 12000, status: "pending", phone: "010-7172-6334", customerType: "지정", visitInfo: "최근 10일 전 (11/03)", memo: "", bookingMemo: "" },
-          { id: 203, period: "오후", time: "3:00", name: "신초롱님", service: "남자컷", price: 12000, status: "pending", phone: "010-3755-6293", customerType: "지정", visitInfo: "최근 33일 전 (10/11)", memo: "", bookingMemo: "" }
+
         ]
       }
     };
