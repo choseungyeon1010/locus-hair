@@ -1,10 +1,10 @@
 {
-  "updated_at": "2026-11-15T10:25:00+09:00",
+  "updated_at": "2026-11-15T13:23:00+09:00",
   "today": {
     "date": "2026-11-15",
     "day_label": "11월 15일 일요일",
-    "total_count": 14,
-    "total_revenue": 242000,
+    "total_count": 15,
+    "total_revenue": 272000,
     "reservations": [
       {
         "id": 101,
@@ -229,6 +229,22 @@
         "status": "pending",
         "memo": "",
         "booking_memo": "네이버 예약건 · 미결제금액 12,000원 · 디자이너 지정"
+      },
+      {
+        "id": 115,
+        "time": "6:00",
+        "period": "오후",
+        "name": "송승근님",
+        "phone": "010-2547-1621",
+        "service": "일반펌 (남)",
+        "price": 30000,
+        "pay": "현장결제",
+        "assigned": true,
+        "customer_type": "지정",
+        "visit_info": "방문 이력 없음 (신규)",
+        "status": "pending",
+        "memo": "",
+        "booking_memo": "네이버 예약건 · 미결제금액 30,000원 · 디자이너 지정"
       }
     ]
   },
