@@ -1,10 +1,10 @@
 {
-  "updated_at": "2026-11-15T01:55:00+09:00",
+  "updated_at": "2026-11-15T09:55:00+09:00",
   "today": {
     "date": "2026-11-15",
     "day_label": "11월 15일 일요일",
-    "total_count": 11,
-    "total_revenue": 201000,
+    "total_count": 13,
+    "total_revenue": 230000,
     "reservations": [
       {
         "id": 101,
@@ -167,6 +167,22 @@
         "booking_memo": "네이버 예약건 · 미결제금액 20,000원 · 디자이너 지정"
       },
       {
+        "id": 112,
+        "time": "4:30",
+        "period": "오후",
+        "name": "문관호님",
+        "phone": "010-6311-0285",
+        "service": "남자컷 + 샴푸 (남성)",
+        "price": 17000,
+        "pay": "현장결제",
+        "assigned": true,
+        "customer_type": "지정",
+        "visit_info": "최근 32일 전 (10/14)",
+        "status": "pending",
+        "memo": "귀덮는 기장으로 기르실 예정 윗머리 길러서 펌",
+        "booking_memo": "네이버 예약건 · 미결제금액 17,000원 · 디자이너 지정"
+      },
+      {
         "id": 110,
         "time": "5:00",
         "period": "오후",
@@ -178,6 +194,22 @@
         "assigned": true,
         "customer_type": "지정",
         "visit_info": "최근 28일 전 (10/18)",
+        "status": "pending",
+        "memo": "",
+        "booking_memo": "네이버 예약건 · 미결제금액 12,000원 · 디자이너 지정"
+      },
+      {
+        "id": 113,
+        "time": "5:30",
+        "period": "오후",
+        "name": "임형택님",
+        "phone": "010-6414-3586",
+        "service": "남자컷",
+        "price": 12000,
+        "pay": "현장결제",
+        "assigned": true,
+        "customer_type": "지정",
+        "visit_info": "최근 25일 전 (10/21)",
         "status": "pending",
         "memo": "",
         "booking_memo": "네이버 예약건 · 미결제금액 12,000원 · 디자이너 지정"
