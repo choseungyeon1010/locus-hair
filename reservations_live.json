@@ -1,10 +1,10 @@
 {
-  "updated_at": "2026-11-15T09:55:00+09:00",
+  "updated_at": "2026-11-15T10:25:00+09:00",
   "today": {
     "date": "2026-11-15",
     "day_label": "11월 15일 일요일",
-    "total_count": 13,
-    "total_revenue": 230000,
+    "total_count": 14,
+    "total_revenue": 242000,
     "reservations": [
       {
         "id": 101,
@@ -69,6 +69,22 @@
         "status": "pending",
         "memo": "",
         "booking_memo": "네이버 예약건 · 미결제금액 12,000원 · 디자이너 지정"
+      },
+      {
+        "id": 114,
+        "time": "1:15",
+        "period": "오후",
+        "name": "고순환님",
+        "phone": "010-4576-1357",
+        "service": "남자컷",
+        "price": 12000,
+        "pay": "현장결제",
+        "assigned": true,
+        "customer_type": "지정",
+        "visit_info": "최근 26일 전 (10/20)",
+        "status": "pending",
+        "memo": "일반펌10호",
+        "booking_memo": "매장 직접 예약 · 2026-11-15 오전 10:10 입력 (재방지정)"
       },
       {
         "id": 105,
