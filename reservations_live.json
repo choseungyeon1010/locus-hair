@@ -1,10 +1,10 @@
 {
-  "updated_at": "2026-11-17T11:36:00+09:00",
+  "updated_at": "2026-11-17T12:06:00+09:00",
   "today": {
     "date": "2026-11-17",
     "day_label": "11월 17일 화요일",
-    "total_count": 12,
-    "total_revenue": 170000,
+    "total_count": 13,
+    "total_revenue": 182000,
     "reservations": [
       {
         "id": 306,
@@ -133,6 +133,22 @@
         "status": "pending",
         "memo": "",
         "booking_memo": "네이버 예약건 · 미결제금액 17,000원 · 디자이너 지정"
+      },
+      {
+        "id": 313,
+        "time": "5:00",
+        "period": "오후",
+        "name": "최성민님",
+        "phone": "010-7155-2550",
+        "service": "남자컷",
+        "price": 12000,
+        "pay": "현장결제",
+        "assigned": true,
+        "customer_type": "지정",
+        "visit_info": "최근 25일 전 (10/23)",
+        "status": "pending",
+        "memo": "",
+        "booking_memo": "네이버 예약건 · 미결제금액 12,000원 · 디자이너 지정"
       },
       {
         "id": 307,
