@@ -181,33 +181,16 @@
   </main>
 
   <script>
-    // Embedded Data Feed: HandSOS CRM 실측 기준 (11/16 월 0건, 11/17 화 8건, 11/18 수 2건)
+    // 실시간 예약 데이터는 reservations_live.json에서 fetch로 로드 (HTML·JSON 분리 · 0토큰 변경감지)
+    // HTML 안에는 예약 데이터를 하드코딩하지 않는다. 데이터 갱신은 JSON 파일만 교체한다.
     const DATA = {
-      today: {
-        dateLabel: "11월 16일 월요일",
-        reservations: []
-      },
-      tomorrow: {
-        dateLabel: "11월 17일 화요일",
-        reservations: [
-          {"id": 306, "period": "오전", "time": "10:00", "name": "정연복님", "service": "남자컷", "price": 12000, "status": "pending", "phone": "010-9925-8242", "customerType": "신규/지정", "visitInfo": "방문 이력 없음 (신규)", "memo": "", "bookingMemo": "네이버 예약건 · 미결제금액 12,000원 · 디자이너 지정"},
-          {"id": 301, "period": "오전", "time": "10:30", "name": "류근우님", "service": "남자컷 + 샴푸 (남성)", "price": 17000, "status": "pending", "phone": "010-5205-3027", "customerType": "지정", "visitInfo": "최근 41일 전 (10/06)", "memo": "", "bookingMemo": "네이버 예약건 · 미결제금액 17,000원 · 디자이너 지정"},
-          {"id": 303, "period": "오전", "time": "11:00", "name": "박정혁님", "service": "일반펌 (남)", "price": 30000, "status": "pending", "phone": "010-4073-4272", "customerType": "지정", "visitInfo": "최근 24일 전 (10/23)", "memo": "", "bookingMemo": "네이버 예약건 · 미결제금액 30,000원 · 디자이너 지정"},
-          {"id": 308, "period": "오후", "time": "2:30", "name": "김윤구님", "service": "남자컷", "price": 12000, "status": "pending", "phone": "010-7926-0889", "customerType": "신규/지정", "visitInfo": "방문 이력 없음 (신규)", "memo": "", "bookingMemo": "네이버 예약건 · 미결제금액 12,000원 · 디자이너 지정"},
-          {"id": 304, "period": "오후", "time": "4:00", "name": "김보성님", "service": "남자컷 + 샴푸 (남성)", "price": 17000, "status": "pending", "phone": "010-5729-6796", "customerType": "신규/지정", "visitInfo": "방문 이력 없음 (신규)", "memo": "", "bookingMemo": "네이버 예약건 · 미결제금액 17,000원 · 디자이너 지정"},
-          {"id": 307, "period": "오후", "time": "5:30", "name": "최지나님", "service": "남학생컷", "price": 10000, "status": "pending", "phone": "010-6587-2838", "customerType": "지정", "visitInfo": "최근 20일 전 (10/27)", "memo": "황중필/ 큰아들 간지럼 예민함ㆍ투블럭이지만 자연스런연결원함 뚜껑머리 싫어함", "bookingMemo": "네이버 예약건 · 미결제금액 10,000원 · 디자이너 지정 · 요청사항: 남학생 2명입니다."},
-          {"id": 302, "period": "오후", "time": "6:00", "name": "장효섭님", "service": "남자컷", "price": 12000, "status": "pending", "phone": "010-3656-8138", "customerType": "지정", "visitInfo": "최근 45일 전 (10/02)", "memo": "", "bookingMemo": "네이버 예약건 · 미결제금액 12,000원 · 디자이너 지정 (네이버 예약자명: 장효석)"},
-          {"id": 305, "period": "오후", "time": "6:30", "name": "안종민님", "service": "남자컷", "price": 12000, "status": "pending", "phone": "010-4942-9842", "customerType": "재방(미입력)", "visitInfo": "최근 34일 전 (10/13)", "memo": "", "bookingMemo": "네이버 예약건 · 잔여금 N-Pay로 현장결제 요청 · 미결제금액 12,000원 · 지정여부 미입력"}
-        ]
-      },
-      dayafter: {
-        dateLabel: "11월 18일 수요일",
-        reservations: [
-          {"id": 401, "period": "오후", "time": "4:00", "name": "송화연님", "service": "남학생컷", "price": 10000, "status": "pending", "phone": "010-9496-7226", "customerType": "재방(미입력)", "visitInfo": "최근 25일 전 (10/22)", "memo": "", "bookingMemo": "네이버 예약건 · 미결제금액 10,000원 · 지정여부 미입력 · 정액권 70,000원 보유"},
-          {"id": 402, "period": "오후", "time": "6:00", "name": "김연규님", "service": "아이롱펌(남성)", "price": 55000, "status": "pending", "phone": "010-2541-8661", "customerType": "지정", "visitInfo": "최근 17일 전 (10/30)", "memo": "", "bookingMemo": "네이버 예약건 · 잔여금 N-Pay로 현장결제 요청 · 미결제금액 55,000원 · 디자이너 지정"}
-        ]
-      }
+      today: { dateLabel: "불러오는 중...", reservations: [] },
+      tomorrow: { dateLabel: "불러오는 중...", reservations: [] },
+      dayafter: { dateLabel: "불러오는 중...", reservations: [] }
     };
+
+    // 피드 로드 상태: 'loading' | 'ok' | 'error'
+    let feedState = 'loading';
 
     let currentDay = 'today';
     let isMemoOpen = false;
@@ -401,9 +384,14 @@
 
       const container = document.getElementById('reservationContainer');
       if (list.length === 0) {
+        const emptyMsg = feedState === 'loading'
+          ? '예약 데이터를 불러오는 중...'
+          : feedState === 'error'
+          ? '예약 데이터를 불러오지 못했습니다 (reservations_live.json 연결 실패)'
+          : '예약이 없습니다.';
         container.innerHTML = `
           <div class="py-12 text-center text-gray-500 text-xs bg-dark-card rounded-2xl border border-dark-border">
-            예약이 없습니다.
+            ${emptyMsg}
           </div>
         `;
         return;
@@ -497,16 +485,24 @@
             DATA.dayafter.reservations = live.dayafter.reservations.map(normalize);
             if (live.dayafter.day_label) DATA.dayafter.dateLabel = live.dayafter.day_label;
           }
+          feedState = 'ok';
           renderReservations();
           document.getElementById('syncStatus').innerText = '자동 동기화 완료';
         }
-      } catch (e) {}
+      } catch (e) {
+        if (feedState !== 'ok') {
+          feedState = 'error';
+          document.getElementById('syncStatus').innerText = '피드 미연결 (JSON 로드 실패)';
+          renderReservations();
+        }
+      }
     }
 
     window.addEventListener('DOMContentLoaded', () => {
       updateClock();
       setInterval(updateClock, 1000);
       renderReservations();
+      fetchLiveFeed();                      // 최초 로드 즉시 1회 (30초 대기 없이 최신 데이터 표시)
       setInterval(fetchLiveFeed, 30000);
     });
   </script>
