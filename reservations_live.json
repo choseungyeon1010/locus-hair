@@ -1,10 +1,10 @@
 {
-  "updated_at": "2026-11-17T09:23:00+09:00",
+  "updated_at": "2026-11-17T11:36:00+09:00",
   "today": {
     "date": "2026-11-17",
     "day_label": "11월 17일 화요일",
-    "total_count": 11,
-    "total_revenue": 158000,
+    "total_count": 12,
+    "total_revenue": 170000,
     "reservations": [
       {
         "id": 306,
@@ -101,6 +101,22 @@
         "status": "pending",
         "memo": "",
         "booking_memo": "네이버 예약건 · 미결제금액 12,000원 · 디자이너 지정"
+      },
+      {
+        "id": 312,
+        "time": "3:30",
+        "period": "오후",
+        "name": "김민수님",
+        "phone": "010-4985-5575",
+        "service": "남성컷",
+        "price": 12000,
+        "pay": "현장결제",
+        "assigned": false,
+        "customer_type": "재방대체",
+        "visit_info": "최근 60일 전 (09/18)",
+        "status": "pending",
+        "memo": "블랙",
+        "booking_memo": "매장 직접 예약 (11:30 등록) · 기존담당 서이/최근 주이"
       },
       {
         "id": 304,
