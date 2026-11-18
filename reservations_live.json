@@ -1,10 +1,10 @@
 {
-  "updated_at": "2026-11-18T00:35:00+09:00",
+  "updated_at": "2026-11-18T10:05:00+09:00",
   "today": {
     "date": "2026-11-18",
     "day_label": "11월 18일 수요일",
-    "total_count": 7,
-    "total_revenue": 171000,
+    "total_count": 8,
+    "total_revenue": 181000,
     "reservations": [
       {
         "id": 403,
@@ -69,6 +69,22 @@
         "status": "pending",
         "memo": "",
         "booking_memo": "네이버 예약건 · 미결제금액 10,000원 · 지정여부 미입력 · 정액권 70,000원 보유 (고객번호 0008489)"
+      },
+      {
+        "id": 407,
+        "time": "4:30",
+        "period": "오후",
+        "name": "김다은님",
+        "phone": "010-9295-4292",
+        "service": "남학생컷",
+        "price": 10000,
+        "pay": "현장결제",
+        "assigned": true,
+        "customer_type": "신규/지정",
+        "visit_info": "방문 이력 없음 (신규)",
+        "status": "pending",
+        "memo": "",
+        "booking_memo": "네이버 예약건 · 미결제금액 10,000원 · 디자이너 지정 (시술 30분 · 예약번호 202611180939156371 · 고객번호 미등록 신규)"
       },
       {
         "id": 406,
